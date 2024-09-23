@@ -1,7 +1,7 @@
 module.exports = {
   "development": {
     "username": "root",
-    "password": null,
+    "password": "123!@#qweQWE",
     "database": "puzzlescrusade",
     "host": "127.0.0.1",
     "dialect": "mysql",
@@ -9,7 +9,7 @@ module.exports = {
   },
   "test": {
     "username": "root",
-    "password": null,
+    "password": "123!@#qweQWE",
     "database": "puzzlescrusade",
     "host": "127.0.0.1",
     "dialect": "mysql",
@@ -17,7 +17,7 @@ module.exports = {
   },
   "production": {
     "username": "root",
-    "password": null,
+    "password": "123!@#qweQWE",
     "database": "puzzlescrusade",
     "host": "127.0.0.1",
     "dialect": "mysql",
