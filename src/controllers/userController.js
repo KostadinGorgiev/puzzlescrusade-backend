@@ -1,0 +1,183 @@
+const moment = require("moment");
+const db = require("../database/models");
+const levelConfig = require("../config/config.json");
+
+module.exports = {
+  initialize: async function (req, res) {
+    const { id, first_name, last_name, username } = req.body;
+    try {
+      const user = await db.User.findOne({
+        where: { t_user_id: id },
+      });
+
+      if (user) {
+        await db.User.update(
+          {
+            first_name: first_name,
+            last_name: last_name,
+            username: username,
+          },
+          {
+            where: {
+              t_user_id: id,
+            },
+          }
+        );
+      } else {
+        let result = await db.User.create({
+          t_user_id: id,
+          first_name: first_name,
+          last_name: last_name,
+          username: username,
+          coin_balance: 0,
+          level_point: 0,
+          energy_point: 1500,
+          energy_size_level: 0,
+          energy_recovery_level: 0,
+          tap_multipler_level: 0,
+          last_tap_time: moment(),
+        });
+
+        await db.DailyCheckIn.create({
+          user_id: result.dataValues.id,
+          checkedin_count: 0,
+          last_check_in: moment().subtract(1, "days"),
+        });
+      }
+    } catch (error) {
+      res.send({ success: false, error: error.message });
+    }
+
+    let result = await module.exports.getUserData(id);
+    res.send({ ...result, success: true });
+  },
+  tap: async function (req, res) {
+    const { id, coin_balance, level_point, energy_point } = req.body;
+
+    try {
+      const user = await db.User.findOne({
+        where: { t_user_id: id },
+      });
+
+      if (user) {
+        await db.User.update(
+          {
+            coin_balance: coin_balance,
+            level_point: level_point,
+            energy_point: energy_point,
+            last_tap_time: moment(),
+          },
+          {
+            where: {
+              t_user_id: id,
+            },
+          }
+        );
+        res.send({ success: true, message: "Updated" });
+      } else {
+        res.send({ success: false, error: "Not found" });
+      }
+    } catch (error) {
+      res.send({ success: false, error: error.message });
+    }
+  },
+  boost: async function (req, res) {
+    const { id, boost_type, energy_point } = req.body;
+    try {
+      const user = await db.User.findOne({
+        where: { t_user_id: id },
+      });
+      if (user) {
+        let updateParam = {
+          last_tap_time: moment(),
+          energy_point: energy_point,
+        };
+        let coinsNeed = 0;
+        if (boost_type === "energy_size_level") {
+          updateParam.energy_size_level = user.energy_size_level + 1;
+          coinsNeed = levelConfig.energySize[user.energy_size_level + 1].cost;
+        } else if (boost_type === "energy_recovery_level") {
+          updateParam.energy_recovery_level = user.energy_recovery_level + 1;
+          coinsNeed = levelConfig.recovery[user.energy_recovery_level + 1].cost;
+        } else if (boost_type === "tap_multipler_level") {
+          updateParam.tap_multipler_level = user.tap_multipler_level + 1;
+          coinsNeed =
+            levelConfig.tapMultipler[user.tap_multipler_level + 1].cost;
+        }
+
+        if (user.coin_balance < coinsNeed) {
+          res.send({
+            success: false,
+            error: `Not enough coins for purchase. current balance: ${user.coin_balance} coins need: (${coinsNeed})`,
+          });
+          return;
+        } else {
+          updateParam.coin_balance = user.coin_balance - coinsNeed;
+        }
+
+        if (user) {
+          await db.User.update(updateParam, {
+            where: {
+              t_user_id: id,
+            },
+          });
+          res.send({ success: true, message: "Purchase success" });
+        } else {
+          res.send({ success: false, error: "Not found" });
+        }
+      }
+    } catch (error) {
+      res.send({ success: false, error: error.message });
+    }
+  },
+  getUserData: async function (id) {
+    // only for existing
+    const user = await db.User.findOne({
+      where: {
+        t_user_id: id,
+      },
+      include: [
+        {
+          model: db.Referral,
+          required: false,
+          include: [
+            {
+              model: db.User,
+              required: false,
+              attributes: [
+                "id",
+                "t_user_id",
+                "first_name",
+                "last_name",
+                "username",
+                "coin_balance",
+                "level_point",
+              ],
+            },
+          ],
+        },
+        {
+          model: db.DailyCheckIn,
+          required: true,
+        },
+      ],
+    });
+
+    let result = user.dataValues;
+
+    let userEnergySize = levelConfig.energySize[user.energy_size_level];
+    let userRecoveryLevel = levelConfig.recovery[user.energy_recovery_level];
+    let passedTime = moment().diff(moment(user.last_tap_time), "second");
+
+    let energyRecovered =
+      (userEnergySize.to * passedTime) / (userRecoveryLevel.to * 60);
+
+    user.energy_point = parseInt(
+      userEnergySize.to > user.energy_point + energyRecovered
+        ? user.energy_point + energyRecovered
+        : userEnergySize.to
+    );
+
+    return { ...result, serverTime: moment() };
+  },
+};
