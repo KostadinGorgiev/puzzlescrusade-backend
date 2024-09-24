@@ -1,10 +1,11 @@
 const moment = require("moment");
 const db = require("../database/models");
 const levelConfig = require("../config/config.json");
+const { fetchUserProfilePhotoUrl } = require("../utils/func");
 
 module.exports = {
   initialize: async function (req, res) {
-    const { id, first_name, last_name, username } = req.body;
+    const { id, first_name, last_name, username, startParam } = req.body;
     try {
       const user = await db.User.findOne({
         where: { t_user_id: id },
@@ -43,6 +44,18 @@ module.exports = {
           checkedin_count: 0,
           last_check_in: moment().subtract(1, "days"),
         });
+
+        if (startParam) {
+          let fromUser = await db.User.findOne({
+            where: { t_user_id: startParam.split("ref")[1] },
+          });
+          if (fromUser) {
+            await db.Referral.create({
+              user_id: fromUser.dataValues.id,
+              reffered_user_id: result.dataValues.id,
+            });
+          }
+        }
       }
     } catch (error) {
       res.send({ success: false, error: error.message });
@@ -163,20 +176,32 @@ module.exports = {
       ],
     });
 
-    let result = user.dataValues;
+    let result = user.get({ plain: true });
 
-    let userEnergySize = levelConfig.energySize[user.energy_size_level];
-    let userRecoveryLevel = levelConfig.recovery[user.energy_recovery_level];
-    let passedTime = moment().diff(moment(user.last_tap_time), "second");
+    let userEnergySize = levelConfig.energySize[result.energy_size_level];
+    let userRecoveryLevel = levelConfig.recovery[result.energy_recovery_level];
+    let passedTime = moment().diff(moment(result.last_tap_time), "second");
 
     let energyRecovered =
       (userEnergySize.to * passedTime) / (userRecoveryLevel.to * 60);
 
-    user.energy_point = parseInt(
-      userEnergySize.to > user.energy_point + energyRecovered
-        ? user.energy_point + energyRecovered
+    result.energy_point = parseInt(
+      userEnergySize.to > result.energy_point + energyRecovered
+        ? result.energy_point + energyRecovered
         : userEnergySize.to
     );
+
+    result.photo_url = await fetchUserProfilePhotoUrl(
+      process.env.BOT_TOKEN,
+      result.t_user_id
+    );
+
+    for (let index = 0; index < result.Referrals.length; index++) {
+      result.Referrals[index].User.photo_url = await fetchUserProfilePhotoUrl(
+        process.env.BOT_TOKEN,
+        result.Referrals[index].User.t_user_id
+      );
+    }
 
     return { ...result, serverTime: moment() };
   },

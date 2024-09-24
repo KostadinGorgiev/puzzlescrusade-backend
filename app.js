@@ -4,6 +4,9 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var cors = require("cors");
+const dotenv = require('dotenv')
+
+dotenv.config()
 
 var usersRouter = require("./src/routes/users");
 var dailyCheckInRouter = require("./src/routes/dailyCheckIn");
