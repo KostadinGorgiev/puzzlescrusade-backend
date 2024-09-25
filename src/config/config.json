@@ -87,5 +87,10 @@
     { "title": "Mythic Guardian", "from": 50000000, "to": 250000000 },
     { "title": "Supreme Paladin", "from": 250000000, "to": 1000000000 },
     { "title": "Eternal Crusader", "from": 1000000000, "to": 10000000000 }
-  ]
+  ],
+  "taskBonus": {
+    "twitter": 1000,
+    "youtube": 1000,
+    "telegram": 1000
+  }
 }

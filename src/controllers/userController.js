@@ -5,7 +5,8 @@ const { fetchUserProfilePhotoUrl } = require("../utils/func");
 
 module.exports = {
   initialize: async function (req, res) {
-    const { id, first_name, last_name, username, startParam } = req.body;
+    const { id, first_name, last_name, username, startParam, isPremium } =
+      req.body;
     try {
       const user = await db.User.findOne({
         where: { t_user_id: id },
@@ -54,6 +55,31 @@ module.exports = {
               user_id: fromUser.dataValues.id,
               reffered_user_id: result.dataValues.id,
             });
+            if (isPremium) {
+              await db.User.update(
+                {
+                  coin_balance: 5000,
+                  level_point: 5000,
+                },
+                {
+                  where: {
+                    t_user_id: id,
+                  },
+                }
+              );
+            } else {
+              await db.User.update(
+                {
+                  coin_balance: 1000,
+                  level_point: 1000,
+                },
+                {
+                  where: {
+                    t_user_id: id,
+                  },
+                }
+              );
+            }
           }
         }
       }
@@ -168,6 +194,10 @@ module.exports = {
               ],
             },
           ],
+        },
+        {
+          model: db.TaskStatus,
+          required: false,
         },
         {
           model: db.DailyCheckIn,

@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "env-cmd -f ./.env.development nodemon ./bin/www",
+    "start:prod": "env-cmd -f ./.env.production nodemon ./bin/www"
   },
   "dependencies": {
     "axios": "^1.7.7",

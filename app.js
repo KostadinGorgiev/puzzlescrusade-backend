@@ -4,12 +4,13 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var cors = require("cors");
-const dotenv = require('dotenv')
+const dotenv = require("dotenv");
 
-dotenv.config()
+dotenv.config();
 
 var usersRouter = require("./src/routes/users");
 var dailyCheckInRouter = require("./src/routes/dailyCheckIn");
+var taskRouter = require("./src/routes/task");
 
 var app = express();
 
@@ -29,6 +30,7 @@ app.get("/", function (req, res) {
 });
 app.use("/users", usersRouter);
 app.use("/daily-checkin", dailyCheckInRouter);
+app.use("/task", taskRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
