@@ -63,7 +63,7 @@ module.exports = {
                 },
                 {
                   where: {
-                    t_user_id: id,
+                    id: fromUser.dataValues.id,
                   },
                 }
               );
@@ -75,7 +75,7 @@ module.exports = {
                 },
                 {
                   where: {
-                    t_user_id: id,
+                    id: fromUser.dataValues.id,
                   },
                 }
               );
