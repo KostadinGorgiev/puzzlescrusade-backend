@@ -1,7 +1,6 @@
 const moment = require("moment");
 const db = require("../database/models");
 const levelConfig = require("../config/config.json");
-const dailycheckin = require("../database/models/dailycheckin");
 
 module.exports = {
   claimBonus: async function (req, res) {
@@ -16,20 +15,35 @@ module.exports = {
         let dailyCheckIn = await db.DailyCheckIn.findOne({
           where: { user_id: user.id },
         });
+        const currentDate = moment().date();
+        const lastCheckinDate = moment(
+          dailyCheckIn.dataValues.last_check_in,
+          "YYYY-MM-DD"
+        ).date();
+        const currentMonth = moment().month();
+        const lastCheckinMonth = moment(
+          dailyCheckIn.dataValues.last_check_in,
+          "YYYY-MM-DD"
+        ).month();
+        const currentYear = moment().year();
+        const lastCheckinYear = moment(
+          dailyCheckIn.dataValues.last_check_in,
+          "YYYY-MM-DD"
+        ).year();
 
         if (
-          moment().isSame(
-            moment(dailyCheckIn.dataValues.last_check_in, "YYYY-MM-DD"),
+          moment([currentYear, currentMonth, currentDate]).isSame(
+            moment([lastCheckinYear, lastCheckinMonth, lastCheckinDate]),
             "day"
           )
         ) {
           res.send({ success: false, error: "Already cliamed" });
           return;
         } else if (
-          moment().diff(
-            moment(dailyCheckIn.dataValues.last_check_in, "YYYY-MM-DD"),
+          moment([currentYear, currentMonth, currentDate]).diff(
+            moment([lastCheckinYear, lastCheckinMonth, lastCheckinDate]),
             "day"
-          ) == 1
+          ) === 1
         ) {
           await db.User.update(
             {
@@ -58,8 +72,8 @@ module.exports = {
             }
           );
         } else if (
-          moment().diff(
-            moment(dailyCheckIn.dataValues.last_check_in, "YYYY-MM-DD"),
+          moment([currentYear, currentMonth, currentDate]).diff(
+            moment([lastCheckinYear, lastCheckinMonth, lastCheckinDate]),
             "day"
           ) > 1
         ) {
