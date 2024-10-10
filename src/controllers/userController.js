@@ -7,6 +7,7 @@ module.exports = {
   initialize: async function (req, res) {
     const { id, first_name, last_name, username, startParam, isPremium } =
       req.body;
+    let isNew = false;
     try {
       const user = await db.User.findOne({
         where: { t_user_id: id },
@@ -26,6 +27,7 @@ module.exports = {
           }
         );
       } else {
+        isNew = true;
         let result = await db.User.create({
           t_user_id: id,
           first_name: first_name,
@@ -87,7 +89,7 @@ module.exports = {
       res.send({ success: false, error: error.message });
     }
 
-    let result = await module.exports.getUserData(id);
+    let result = await module.exports.getUserData(id, isNew);
     res.send({ ...result, success: true });
   },
   tap: async function (req, res) {
@@ -169,7 +171,7 @@ module.exports = {
       res.send({ success: false, error: error.message });
     }
   },
-  getUserData: async function (id) {
+  getUserData: async function (id, isNew = false) {
     // only for existing
     const user = await db.User.findOne({
       where: {
@@ -233,6 +235,6 @@ module.exports = {
       );
     }
 
-    return { ...result, serverTime: moment() };
+    return { ...result, serverTime: moment(), isNew };
   },
 };
