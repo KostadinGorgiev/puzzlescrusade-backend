@@ -24,6 +24,14 @@ module.exports = (sequelize, DataTypes) => {
         sourceKey: "id",
         foreignKey: "user_id",
       });
+      User.hasOne(models.CardClaim, {
+        sourceKey: "id",
+        foreignKey: "user_id",
+      });
+      User.hasMany(models.Cards, {
+        sourceKey: "id",
+        foreignKey: "user_id",
+      });
     }
   }
   User.init(

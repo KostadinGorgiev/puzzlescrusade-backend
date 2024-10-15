@@ -26,6 +26,17 @@ module.exports = {
             },
           }
         );
+        let cardClaim = await db.CardClaim.findOne({
+          where: {
+            user_id: user.id,
+          },
+        });
+        if (!cardClaim) {
+          await db.CardClaim.create({
+            user_id: user.id,
+            last_claim: moment(),
+          });
+        }
       } else {
         isNew = true;
         let result = await db.User.create({
@@ -46,6 +57,11 @@ module.exports = {
           user_id: result.dataValues.id,
           checkedin_count: 0,
           last_check_in: moment().subtract(1, "days"),
+        });
+
+        await db.CardClaim.create({
+          user_id: result.dataValues.id,
+          last_claim: moment(),
         });
 
         if (startParam) {
@@ -204,6 +220,14 @@ module.exports = {
         {
           model: db.DailyCheckIn,
           required: true,
+        },
+        {
+          model: db.CardClaim,
+          required: true,
+        },
+        {
+          model: db.Cards,
+          required: false,
         },
       ],
     });
