@@ -111,7 +111,17 @@ module.exports = {
           return;
         }
 
-        let coinsNeed = hero.level[card.card_level + 1].cost;
+        let nextCardLevel = card.card_level + 1;
+
+        if (hero.level.length - 1 <= nextCardLevel) {
+          res.send({
+            success: false,
+            error: `Card already reached max level`,
+          });
+          return;
+        }
+
+        let coinsNeed = hero.level[nextCardLevel].cost;
 
         if (user.coin_balance < coinsNeed) {
           res.send({
@@ -123,7 +133,7 @@ module.exports = {
 
         await db.Cards.update(
           {
-            card_level: card.card_level + 1,
+            card_level: nextCardLevel,
           },
           {
             where: {
@@ -237,5 +247,34 @@ module.exports = {
       res.send({ success: false, error: error.message });
     }
   },
-  socketHandler: async function (req, res) {},
+  socketHandler: async function (io, usersMap, userId) {
+    const user = await db.User.findOne({
+      where: { t_user_id: userId },
+    });
+    if (user) {
+      const cards = await db.Cards.findAll({
+        where: {
+          user_id: user.id,
+        },
+      });
+      let profitPerHour = 0;
+      for (let index = 0; index < cards.length; index++) {
+        const card = cards[index];
+        const hero = levelConfig.heros.find(
+          (hero) => hero.slug === card.card_slug
+        );
+        if (hero) {
+          profitPerHour += hero.level[card.card_level].profit;
+        }
+      }
+
+      if (profitPerHour > 0) {
+        let coin = (profitPerHour * 5) / 3600;
+        io.to(usersMap[userId]).emit("card_profit", {
+          userId,
+          coin: coin,
+        });
+      }
+    }
+  },
 };

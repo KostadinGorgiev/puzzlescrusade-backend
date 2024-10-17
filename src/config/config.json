@@ -96,9 +96,9 @@
   "heros": [
     {
       "slug": "light",
-      "name": "Thalron",
-      "title": "The Unyielding Guardian",
-      "description": "An ancient fighter channeling the molten power of the earth.",
+      "name": "Liora",
+      "title": "The warrior queen of valor",
+      "description": "An enchanting mage, conjuring sharp shards of frost.",
       "type": "light",
       "level": [
         { "cost": 5000, "profit": 49, "increase": 14 },
@@ -135,9 +135,9 @@
     },
     {
       "slug": "dark",
-      "name": "Thalron",
-      "title": "The Unyielding Guardian",
-      "description": "An ancient fighter channeling the molten power of the earth.",
+      "name": "Sylvarra",
+      "title": "The Shadow Assassin",
+      "description": "A cunning rogue, harnessing darkness to pursue her prey.",
       "type": "dark",
       "level": [
         { "cost": 5000, "profit": 49, "increase": 14 },
@@ -174,9 +174,9 @@
     },
     {
       "slug": "volcano",
-      "name": "Thalron",
-      "title": "The Unyielding Guardian",
-      "description": "An ancient fighter channeling the molten power of the earth.",
+      "name": "Emberion",
+      "title": "The harbinger of heat",
+      "description": "A fierce pyromancer, dancing with flames and foes alike.",
       "type": "volcano",
       "level": [
         { "cost": 5000, "profit": 49, "increase": 14 },
@@ -213,9 +213,9 @@
     },
     {
       "slug": "forest",
-      "name": "Thalron",
-      "title": "The Unyielding Guardian",
-      "description": "An ancient fighter channeling the molten power of the earth.",
+      "name": "Veldar",
+      "title": "The Flora’s Faithful Voice",
+      "description": "A powerful druid, commanding the forces of the forest.",
       "type": "forest",
       "level": [
         { "cost": 5000, "profit": 49, "increase": 14 },
@@ -252,9 +252,9 @@
     },
     {
       "slug": "ocean",
-      "name": "Thalron",
-      "title": "The Unyielding Guardian",
-      "description": "An ancient fighter channeling the molten power of the earth.",
+      "name": "Vornak",
+      "title": "The Harbinger of Blizzards",
+      "description": "A stalwart protector, harnessing the cold to conquer all.",
       "type": "ocean",
       "level": [
         { "cost": 5000, "profit": 49, "increase": 14 },
@@ -290,11 +290,11 @@
       ]
     }
   ],
-  "heroColor": {
-    "light": "#FAB648",
-    "dark": "#570D5D",
-    "volcano": "#B70D0D",
-    "forest": "#149D53",
-    "ocean": "#143E9D"
+  "heroType": {
+    "light": { "name": "Light Born Hero", "color": "#FAB648" },
+    "dark": { "name": "Darkness Born Hero", "color": "#570D5D" },
+    "volcano": { "name": "Volcano Born Hero", "color": "#B70D0D" },
+    "forest": { "name": "Forest Born Hero", "color": "#149D53" },
+    "ocean": { "name": "Ocean Born Hero", "color": "#143E9D" }
   }
 }

@@ -1,3 +1,5 @@
+var debug = require("debug")("puzzlescrusade-backend:server");
+var http = require("http");
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
@@ -8,12 +10,19 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
+const { Server } = require("socket.io"); // Import Socket.IO Server class
+const { createProxyMiddleware } = require("http-proxy-middleware");
+
 var usersRouter = require("./src/routes/users");
 var dailyCheckInRouter = require("./src/routes/dailyCheckIn");
 var taskRouter = require("./src/routes/task");
 var cardRouter = require("./src/routes/card");
+const cardController = require("./src/controllers/cardController");
 
+var usersMap = {};
+var intervalMap = {};
 var app = express();
+// var io = socketIo();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -25,6 +34,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+// app.io = io;
+
+// app.use(socketProxy);
 
 app.get("/", function (req, res) {
   res.send({ status: "success", message: "app is running..." });
@@ -50,4 +62,89 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
-module.exports = app;
+var port = normalizePort(process.env.PORT || "8080");
+
+var server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "*", // Allow requests from this origin and my frontend port = 5173
+    methods: ["GET", "POST"], // Allow these HTTP methods
+  },
+});
+io.on("connection", (socket) => {
+  socket.on("addUser", (data) => {
+    console.log('addUser', data.userId);
+    
+    if (data && data.userId) {
+      socket.userId = data.userId;
+      usersMap[data.userId] = socket.id;
+      intervalMap[data.userId] = setInterval(() => {
+        cardController.socketHandler(io, usersMap, data.userId);
+      }, 5000);
+    }
+  });
+  socket.on("disconnect", () => {
+    console.log("disconnecty", intervalMap[socket.userId]);
+    clearInterval(intervalMap[socket.userId]);
+    delete usersMap[socket.userId];
+    delete intervalMap[socket.userId];
+  });
+});
+
+server.listen(port);
+server.on("error", onError);
+server.on("listening", onListening);
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== "listen") {
+    throw error;
+  }
+
+  var bind = typeof port === "string" ? "Pipe " + port : "Port " + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case "EACCES":
+      console.error(bind + " requires elevated privileges");
+      process.exit(1);
+      break;
+    case "EADDRINUSE":
+      console.error(bind + " is already in use");
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
+  debug("Listening on " + bind);
+
+  console.log("Server is running on");
+}

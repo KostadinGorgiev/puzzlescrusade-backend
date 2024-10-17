@@ -62,9 +62,12 @@ module.exports = {
               where: { id: user.id },
             }
           );
+          let updateDaliyCheckInCount =
+            dailyCheckIn.dataValues.checkedin_count + 1;
           await db.DailyCheckIn.update(
             {
-              checkedin_count: dailyCheckIn.dataValues.checkedin_count + 1,
+              checkedin_count:
+                updateDaliyCheckInCount > 15 ? 15 : updateDaliyCheckInCount,
               last_check_in: moment(),
             },
             {
