@@ -270,6 +270,28 @@ module.exports = {
 
       if (profitPerHour > 0) {
         let coin = (profitPerHour * 5) / 3600;
+
+        await db.User.update(
+          {
+            coin_balance: user.coin_balance + coin,
+          },
+          {
+            where: {
+              t_user_id: id,
+            },
+          }
+        );
+
+        await db.CardClaim.update(
+          {
+            last_claim: moment(),
+          },
+          {
+            where: {
+              user_id: user.id,
+            },
+          }
+        );
         io.to(usersMap[userId]).emit("card_profit", {
           userId,
           coin: coin,
