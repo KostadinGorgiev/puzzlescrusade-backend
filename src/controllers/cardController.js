@@ -277,7 +277,7 @@ module.exports = {
           },
           {
             where: {
-              t_user_id: id,
+              t_user_id: userId,
             },
           }
         );
