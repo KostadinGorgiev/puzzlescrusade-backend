@@ -174,9 +174,9 @@
     },
     {
       "slug": "volcano",
-      "name": "Emberion",
-      "title": "The harbinger of heat",
-      "description": "A fierce pyromancer, dancing with flames and foes alike.",
+      "name": "Kaelar",
+      "title": "The Bone Collector",
+      "description": "A savage warrior, fueled by the souls of the fallen.",
       "type": "volcano",
       "level": [
         { "cost": 5000, "profit": 49, "increase": 14 },
