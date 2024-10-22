@@ -174,19 +174,13 @@ module.exports = {
     }
   },
   claimProfit: async function (req, res) {
-    const { id, time } = req.body;
+    const { id, time, last_claim } = req.body;
 
     try {
       const user = await db.User.findOne({
         where: { t_user_id: id },
       });
-      const cardClaim = await db.CardClaim.findOne({
-        where: {
-          user_id: user.id,
-        },
-      });
-      let diffHrs =
-        moment(time).diff(moment(cardClaim.last_claim), "seconds") / 3600;
+      let diffHrs = moment(time).diff(moment(last_claim), "seconds") / 3600;
       diffHrs = diffHrs > 3 ? 3 : diffHrs;
       const cards = await db.Cards.findAll({
         where: {
@@ -281,22 +275,27 @@ module.exports = {
             },
           }
         );
-
-        await db.CardClaim.update(
-          {
-            last_claim: moment(),
-          },
-          {
-            where: {
-              user_id: user.id,
-            },
-          }
-        );
         io.to(usersMap[userId]).emit("card_profit", {
           userId,
           coin: coin,
         });
+      } else {
+        io.to(usersMap[userId]).emit("card_profit", {
+          userId,
+          coin: 0,
+        });
       }
+
+      await db.CardClaim.update(
+        {
+          last_claim: moment(),
+        },
+        {
+          where: {
+            user_id: user.id,
+          },
+        }
+      );
     }
   },
 };
