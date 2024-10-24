@@ -209,6 +209,7 @@ module.exports = {
         await db.User.update(
           {
             coin_balance: user.coin_balance + parseInt(profitPerHour * diffHrs),
+            level_point: user.level_point + parseInt(profitPerHour * diffHrs),
           },
           {
             where: {
@@ -231,6 +232,7 @@ module.exports = {
           success: true,
           message: "Profit claimed successfully",
           coin_balance: user.coin_balance + parseInt(profitPerHour * diffHrs),
+          level_point: user.level_point + parseInt(profitPerHour * diffHrs),
         });
         return;
       } else {
@@ -268,6 +270,7 @@ module.exports = {
         await db.User.update(
           {
             coin_balance: user.coin_balance + coin,
+            level_point: user.level_point + coin,
           },
           {
             where: {

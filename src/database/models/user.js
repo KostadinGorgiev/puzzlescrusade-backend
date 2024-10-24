@@ -41,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
       last_name: { type: DataTypes.STRING, allowNull: true },
       username: { type: DataTypes.STRING, allowNull: true },
       coin_balance: { type: DataTypes.FLOAT, allowNull: true },
-      level_point: { type: DataTypes.INTEGER, allowNull: true },
+      level_point: { type: DataTypes.FLOAT, allowNull: true },
       energy_point: { type: DataTypes.INTEGER, allowNull: true },
       energy_size_level: { type: DataTypes.INTEGER, allowNull: true },
       energy_recovery_level: { type: DataTypes.INTEGER, allowNull: true },
