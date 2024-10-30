@@ -76,8 +76,8 @@ module.exports = {
             if (isPremium) {
               await db.User.update(
                 {
-                  coin_balance: 5000,
-                  level_point: 5000,
+                  coin_balance: fromUser.dataValues.coin_balance + 5000,
+                  level_point: fromUser.dataValues.level_point + 5000,
                 },
                 {
                   where: {
@@ -88,8 +88,8 @@ module.exports = {
             } else {
               await db.User.update(
                 {
-                  coin_balance: 1000,
-                  level_point: 1000,
+                  coin_balance: fromUser.dataValues.coin_balance + 1000,
+                  level_point: fromUser.dataValues.level_point + 1000,
                 },
                 {
                   where: {
