@@ -288,6 +288,45 @@
         { "cost": 1779097, "profit": 39402, "increase": 10597 },
         { "cost": 1903908, "profit": 50000, "increase": 0 }
       ]
+    },
+    {
+      "slug": "jack",
+      "name": "Jack",
+      "title": "The Melodic Phantom",
+      "description": "A minstrel of the night, casting spells and charming those who dare listen",
+      "type": "dark",
+      "level": [
+        { "cost": 5000, "profit": 49, "increase": 14 },
+        { "cost": 956, "profit": 63, "increase": 17 },
+        { "cost": 4530, "profit": 80, "increase": 22 },
+        { "cost": 11320, "profit": 102, "increase": 27 },
+        { "cost": 35430, "profit": 129, "increase": 35 },
+        { "cost": 76156, "profit": 164, "increase": 44 },
+        { "cost": 103657, "profit": 208, "increase": 56 },
+        { "cost": 135389, "profit": 264, "increase": 72 },
+        { "cost": 171352, "profit": 336, "increase": 90 },
+        { "cost": 211545, "profit": 426, "increase": 115 },
+        { "cost": 255970, "profit": 541, "increase": 145 },
+        { "cost": 304625, "profit": 686, "increase": 185 },
+        { "cost": 357512, "profit": 871, "increase": 235 },
+        { "cost": 414629, "profit": 1106, "increase": 297 },
+        { "cost": 475977, "profit": 1403, "increase": 378 },
+        { "cost": 541556, "profit": 1781, "increase": 479 },
+        { "cost": 611366, "profit": 2260, "increase": 608 },
+        { "cost": 685407, "profit": 2868, "increase": 771 },
+        { "cost": 763679, "profit": 3639, "increase": 979 },
+        { "cost": 846182, "profit": 4618, "increase": 1242 },
+        { "cost": 932915, "profit": 5860, "increase": 1576 },
+        { "cost": 1023880, "profit": 7436, "increase": 2000 },
+        { "cost": 1119075, "profit": 9436, "increase": 2539 },
+        { "cost": 1218501, "profit": 11975, "increase": 3220 },
+        { "cost": 1322159, "profit": 15195, "increase": 4088 },
+        { "cost": 1430047, "profit": 19283, "increase": 5186 },
+        { "cost": 1542166, "profit": 24469, "increase": 6581 },
+        { "cost": 1658516, "profit": 31050, "increase": 8352 },
+        { "cost": 1779097, "profit": 39402, "increase": 10597 },
+        { "cost": 1903908, "profit": 50000, "increase": 0 }
+      ]
     }
   ],
   "heroType": {
