@@ -327,6 +327,45 @@
         { "cost": 1779097, "profit": 39402, "increase": 10597 },
         { "cost": 1903908, "profit": 50000, "increase": 0 }
       ]
+    },
+    {
+      "slug": "aegiron",
+      "name": "Aegiron",
+      "title": "The Starbound Sentinel",
+      "description": "A guardian of realms, defender of the sky, bearing a shield of valor",
+      "type": "light",
+      "level": [
+        { "cost": 5000, "profit": 29, "increase": 8 },
+        { "cost": 478, "profit": 38, "increase": 10 },
+        { "cost": 2265, "profit": 48, "increase": 13 },
+        { "cost": 5660, "profit": 61, "increase": 16 },
+        { "cost": 17715, "profit": 77, "increase": 21 },
+        { "cost": 38078, "profit": 98, "increase": 26 },
+        { "cost": 51829, "profit": 125, "increase": 34 },
+        { "cost": 67695, "profit": 158, "increase": 43 },
+        { "cost": 85676, "profit": 202, "increase": 54 },
+        { "cost": 105773, "profit": 256, "increase": 69 },
+        { "cost": 127985, "profit": 325, "increase": 87 },
+        { "cost": 152313, "profit": 412, "increase": 111 },
+        { "cost": 178756, "profit": 523, "increase": 141 },
+        { "cost": 207315, "profit": 664, "increase": 178 },
+        { "cost": 237989, "profit": 842, "increase": 227 },
+        { "cost": 270778, "profit": 1069, "increase": 287 },
+        { "cost": 305683, "profit": 1356, "increase": 365 },
+        { "cost": 342704, "profit": 1721, "increase": 463 },
+        { "cost": 381840, "profit": 2183, "increase": 587 },
+        { "cost": 423091, "profit": 2771, "increase": 745 },
+        { "cost": 466458, "profit": 3516, "increase": 946 },
+        { "cost": 511940, "profit": 4462, "increase": 1200 },
+        { "cost": 559538, "profit": 5662, "increase": 1523 },
+        { "cost": 609251, "profit": 7185, "increase": 1932 },
+        { "cost": 661080, "profit": 9117, "increase": 2453 },
+        { "cost": 715024, "profit": 11570, "increase": 3112 },
+        { "cost": 771083, "profit": 14681, "increase": 3949 },
+        { "cost": 829258, "profit": 18630, "increase": 5011 },
+        { "cost": 889549, "profit": 23641, "increase": 6359 },
+        { "cost": 983203, "profit": 30000, "increase": 0 }
+      ]
     }
   ],
   "heroType": {

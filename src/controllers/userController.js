@@ -246,11 +246,12 @@ module.exports = {
         ? result.energy_point + energyRecovered
         : userEnergySize.to
     );
-
-    result.photo_url = await fetchUserProfilePhotoUrl(
-      process.env.BOT_TOKEN,
-      result.t_user_id
-    );
+    if (process.env.IS_LOCAL !== "true") {
+      result.photo_url = await fetchUserProfilePhotoUrl(
+        process.env.BOT_TOKEN,
+        result.t_user_id
+      );
+    }
 
     for (let index = 0; index < result.Referrals.length; index++) {
       result.Referrals[index].User.photo_url = await fetchUserProfilePhotoUrl(
