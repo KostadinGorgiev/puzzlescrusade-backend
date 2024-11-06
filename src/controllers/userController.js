@@ -187,6 +187,53 @@ module.exports = {
       res.send({ success: false, error: error.message });
     }
   },
+  getReferral: async function (req, res) {
+    const { id, page } = req.body;
+    try {
+      const user = await db.User.findOne({
+        where: { t_user_id: id },
+      });
+      if (user) {
+        const results = await db.Referral.findAll({
+          where: {
+            user_id: user.id,
+          },
+          include: [
+            {
+              model: db.User,
+              required: false,
+              attributes: [
+                "id",
+                "t_user_id",
+                "first_name",
+                "last_name",
+                "username",
+                "coin_balance",
+                "level_point",
+              ],
+            },
+          ],
+          order: [[{ model: db.User }, "level_point", "DESC"]],
+          limit: 5,
+          offset: (page - 1) * 5,
+        });
+
+        if (process.env.IS_LOCAL !== "true") {
+          for (let index = 0; index < results.length; index++) {
+            results[index].User.photo_url = await fetchUserProfilePhotoUrl(
+              process.env.BOT_TOKEN,
+              results[index].User.t_user_id
+            );
+          }
+        }
+        res.send({ success: true, results });
+      } else {
+        res.send({ success: false, error: "Not found" });
+      }
+    } catch (error) {
+      res.send({ success: false, error: error.message });
+    }
+  },
   getUserData: async function (id, isNew = false) {
     // only for existing
     const user = await db.User.findOne({
@@ -212,6 +259,8 @@ module.exports = {
               ],
             },
           ],
+          order: [[{ model: db.User }, "level_point", "DESC"]],
+          limit: 5,
         },
         {
           model: db.TaskStatus,
@@ -253,12 +302,20 @@ module.exports = {
       );
     }
 
-    for (let index = 0; index < result.Referrals.length; index++) {
-      result.Referrals[index].User.photo_url = await fetchUserProfilePhotoUrl(
-        process.env.BOT_TOKEN,
-        result.Referrals[index].User.t_user_id
-      );
+    if (process.env.IS_LOCAL !== "true") {
+      for (let index = 0; index < result.Referrals.length; index++) {
+        result.Referrals[index].User.photo_url = await fetchUserProfilePhotoUrl(
+          process.env.BOT_TOKEN,
+          result.Referrals[index].User.t_user_id
+        );
+      }
     }
+
+    result.total_referral_count = await db.Referral.count({
+      where: {
+        user_id: result.id,
+      },
+    });
 
     return { ...result, serverTime: moment(), isNew };
   },
