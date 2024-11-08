@@ -89,9 +89,9 @@
     { "title": "Eternal Crusader", "from": 1000000000, "to": 10000000000 }
   ],
   "taskBonus": {
-    "twitter": 1000,
-    "youtube": 1000,
-    "telegram": 1000,
+    "twitter": 10000,
+    "youtube": 10000,
+    "telegram": 10000,
     "twitter-1": 10000,
     "twitter-2": 10000
   },
