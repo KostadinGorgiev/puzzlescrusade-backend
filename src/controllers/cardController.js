@@ -112,8 +112,7 @@ module.exports = {
         }
 
         let nextCardLevel = card.card_level + 1;
-
-        if (hero.level.length - 1 <= nextCardLevel) {
+        if (hero.level.length - 1 < nextCardLevel) {
           res.send({
             success: false,
             error: `Card already reached max level`,
