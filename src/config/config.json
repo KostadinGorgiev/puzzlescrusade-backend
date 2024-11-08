@@ -91,7 +91,9 @@
   "taskBonus": {
     "twitter": 1000,
     "youtube": 1000,
-    "telegram": 1000
+    "telegram": 1000,
+    "twitter-1": 10000,
+    "twitter-2": 10000
   },
   "heros": [
     {
