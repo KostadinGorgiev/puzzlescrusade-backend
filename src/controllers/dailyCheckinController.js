@@ -62,6 +62,7 @@ module.exports = {
               where: { id: user.id },
             }
           );
+          // reset or update daily check in count
           let updateDaliyCheckInCount =
             dailyCheckIn.dataValues.checkedin_count + 1;
           await db.DailyCheckIn.update(

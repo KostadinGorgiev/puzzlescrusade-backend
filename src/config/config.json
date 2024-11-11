@@ -407,6 +407,45 @@
         { "cost": 6173467, "profit": 57921, "increase": 15579 },
         { "cost": 7423429, "profit": 73500, "increase": 0 }
       ]
+    },
+    {
+      "slug": "morgath",
+      "name": "Morgath the Wise",
+      "title": "The Ancient Seer of Secrets",
+      "description": "A mysterious sage, guiding the lost with ancient wisdom.",
+      "type": "ocean",
+      "level": [
+        { "cost": 5000, "profit": 62, "increase": 19 },
+        { "cost": 2151, "profit": 79, "increase": 22 },
+        { "cost": 10193, "profit": 101, "increase": 28 },
+        { "cost": 25470, "profit": 129, "increase": 34 },
+        { "cost": 79718, "profit": 163, "increase": 44 },
+        { "cost": 171351, "profit": 207, "increase": 55 },
+        { "cost": 233228, "profit": 262, "increase": 71 },
+        { "cost": 304625, "profit": 333, "increase": 90 },
+        { "cost": 385542, "profit": 423, "increase": 114 },
+        { "cost": 475976, "profit": 537, "increase": 145 },
+        { "cost": 575933, "profit": 682, "increase": 182 },
+        { "cost": 685406, "profit": 864, "increase": 233 },
+        { "cost": 804402, "profit": 1097, "increase": 297 },
+        { "cost": 932915, "profit": 1394, "increase": 374 },
+        { "cost": 1070948, "profit": 1768, "increase": 476 },
+        { "cost": 1218501, "profit": 2244, "increase": 604 },
+        { "cost": 1375574, "profit": 2848, "increase": 766 },
+        { "cost": 1542166, "profit": 3614, "increase": 971 },
+        { "cost": 1718278, "profit": 4585, "increase": 1234 },
+        { "cost": 1903910, "profit": 5819, "increase": 1565 },
+        { "cost": 2099059, "profit": 7384, "increase": 1985 },
+        { "cost": 2303730, "profit": 9369, "increase": 2520 },
+        { "cost": 2517919, "profit": 11889, "increase": 3200 },
+        { "cost": 2741627, "profit": 15089, "increase": 4057 },
+        { "cost": 2974858, "profit": 19146, "increase": 5151 },
+        { "cost": 3217606, "profit": 24297, "increase": 6534 },
+        { "cost": 3469874, "profit": 30831, "increase": 8292 },
+        { "cost": 3731661, "profit": 39123, "increase": 10524 },
+        { "cost": 4002968, "profit": 49647, "increase": 13353 },
+        { "cost": 4424413, "profit": 63000, "increase": 0 }
+      ]
     }
   ],
   "heroType": {
