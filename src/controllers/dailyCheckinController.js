@@ -67,7 +67,7 @@ module.exports = {
           await db.DailyCheckIn.update(
             {
               checkedin_count:
-                updateDaliyCheckInCount > 15 ? 15 : updateDaliyCheckInCount,
+                updateDaliyCheckInCount > 15 ? 0 : updateDaliyCheckInCount,
               last_check_in: moment(),
             },
             {
