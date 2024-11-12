@@ -17,6 +17,7 @@ var usersRouter = require("./src/routes/users");
 var dailyCheckInRouter = require("./src/routes/dailyCheckIn");
 var taskRouter = require("./src/routes/task");
 var cardRouter = require("./src/routes/card");
+var adminRouter = require("./src/routes/admin");
 const cardController = require("./src/controllers/cardController");
 
 var usersMap = {};
@@ -45,6 +46,7 @@ app.use("/users", usersRouter);
 app.use("/daily-checkin", dailyCheckInRouter);
 app.use("/task", taskRouter);
 app.use("/card", cardRouter);
+app.use("/admin", adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

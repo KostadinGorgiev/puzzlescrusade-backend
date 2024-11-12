@@ -267,6 +267,10 @@ module.exports = {
           required: false,
         },
         {
+          model: db.UserTaskStatus,
+          required: false,
+        },
+        {
           model: db.DailyCheckIn,
           required: true,
         },

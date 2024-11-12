@@ -16,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
         sourceKey: "id",
         foreignKey: "user_id",
       });
+      User.hasMany(models.UserTaskStatus, {
+        sourceKey: "id",
+        foreignKey: "user_id",
+      });
       User.belongsTo(models.Referral, {
         targetKey: "reffered_user_id",
         foreignKey: "id",
