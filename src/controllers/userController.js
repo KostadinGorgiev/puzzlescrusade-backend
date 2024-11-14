@@ -1,4 +1,5 @@
 const moment = require("moment");
+const { Op } = require("sequelize");
 const db = require("../database/models");
 const levelConfig = require("../config/config.json");
 const { fetchUserProfilePhotoUrl } = require("../utils/func");
@@ -322,5 +323,16 @@ module.exports = {
     });
 
     return { ...result, serverTime: moment(), isNew };
+  },
+  getActiveUsers: async function (usersMap) {
+    const ids = Object.keys(usersMap);
+    const users = await db.User.findAll({
+      where: {
+        t_user_id: {
+          [Op.in]: ids,
+        },
+      },
+    });
+    return users;
   },
 };

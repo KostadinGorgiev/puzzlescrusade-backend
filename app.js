@@ -19,6 +19,7 @@ var taskRouter = require("./src/routes/task");
 var cardRouter = require("./src/routes/card");
 var adminRouter = require("./src/routes/admin");
 const cardController = require("./src/controllers/cardController");
+const userControler = require("./src/controllers/userController");
 
 var usersMap = {};
 var intervalMap = {};
@@ -39,8 +40,9 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // app.use(socketProxy);
 
-app.get("/", function (req, res) {
-  res.send({ status: "success", message: "app is running..." });
+app.get("/", async function (req, res) {
+  let activeUsers = await userControler.getActiveUsers(usersMap);
+  res.send({ status: "success", message: "app is running...", activeUsers });
 });
 app.use("/users", usersRouter);
 app.use("/daily-checkin", dailyCheckInRouter);
@@ -75,8 +77,8 @@ const io = new Server(server, {
 });
 io.on("connection", (socket) => {
   socket.on("addUser", (data) => {
-    console.log('addUser', data.userId);
-    
+    console.log("addUser", data.userId);
+
     if (data && data.userId) {
       socket.userId = data.userId;
       usersMap[data.userId] = socket.id;
