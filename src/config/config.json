@@ -446,6 +446,45 @@
         { "cost": 4002968, "profit": 49647, "increase": 13353 },
         { "cost": 4424413, "profit": 63000, "increase": 0 }
       ]
+    },
+    {
+      "slug": "fennel",
+      "name": "Fennel",
+      "title": "The Earthshaker",
+      "description": "A cunning fighter, using agility and wit to overcome foes.",
+      "type": "light",
+      "level": [
+        { "cost": 5000, "profit": 72, "increase": 21 },
+        { "cost": 2629, "profit": 93, "increase": 25 },
+        { "cost": 12458, "profit": 118, "increase": 32 },
+        { "cost": 31130, "profit": 150, "increase": 40 },
+        { "cost": 97433, "profit": 190, "increase": 51 },
+        { "cost": 209429, "profit": 241, "increase": 65 },
+        { "cost": 285057, "profit": 306, "increase": 82 },
+        { "cost": 372320, "profit": 388, "increase": 106 },
+        { "cost": 471218, "profit": 494, "increase": 132 },
+        { "cost": 581749, "profit": 626, "increase": 169 },
+        { "cost": 703918, "profit": 795, "increase": 213 },
+        { "cost": 837719, "profit": 1008, "increase": 272 },
+        { "cost": 983158, "profit": 1280, "increase": 346 },
+        { "cost": 1140230, "profit": 1626, "increase": 436 },
+        { "cost": 1308937, "profit": 2062, "increase": 556 },
+        { "cost": 1489279, "profit": 2618, "increase": 704 },
+        { "cost": 1681257, "profit": 3322, "increase": 894 },
+        { "cost": 1884869, "profit": 4216, "increase": 1133 },
+        { "cost": 2100117, "profit": 5349, "increase": 1439 },
+        { "cost": 2327001, "profit": 6788, "increase": 1826 },
+        { "cost": 2565516, "profit": 8614, "increase": 2317 },
+        { "cost": 2815670, "profit": 10931, "increase": 2940 },
+        { "cost": 3077456, "profit": 13871, "increase": 3732 },
+        { "cost": 3350878, "profit": 17603, "increase": 4744 },
+        { "cost": 3635937, "profit": 22337, "increase": 6009 },
+        { "cost": 3932629, "profit": 28346, "increase": 7623 },
+        { "cost": 4240957, "profit": 35969, "increase": 9675 },
+        { "cost": 4560919, "profit": 45644, "increase": 12277 },
+        { "cost": 4892517, "profit": 57921, "increase": 15579 },
+        { "cost": 5407616, "profit": 73500, "increase": 0 }
+      ]
     }
   ],
   "heroType": {

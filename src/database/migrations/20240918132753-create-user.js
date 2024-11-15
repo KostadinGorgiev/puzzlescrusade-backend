@@ -53,6 +53,10 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: true,
       },
+      last_notified: {
+        type: Sequelize.DATE,
+        allowNull: true,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

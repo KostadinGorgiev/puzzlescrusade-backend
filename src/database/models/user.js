@@ -51,6 +51,7 @@ module.exports = (sequelize, DataTypes) => {
       energy_recovery_level: { type: DataTypes.INTEGER, allowNull: true },
       tap_multipler_level: { type: DataTypes.INTEGER, allowNull: true },
       last_tap_time: { type: DataTypes.DATE, allowNull: true },
+      last_notified: { type: DataTypes.DATE, allowNull: true },
     },
     {
       sequelize,
