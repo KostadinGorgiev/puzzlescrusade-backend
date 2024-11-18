@@ -173,7 +173,7 @@ module.exports = {
     }
   },
   claimProfit: async function (req, res) {
-    const { id, time, last_claim } = req.body;
+    const { id, time, last_claim, doubleCliam } = req.body;
 
     try {
       const user = await db.User.findOne({
@@ -203,6 +203,10 @@ module.exports = {
           if (hero) {
             profitPerHour += hero.level[card.card_level].profit;
           }
+        }
+
+        if (doubleCliam) {
+          profitPerHour = profitPerHour * 2;
         }
 
         await db.User.update(
