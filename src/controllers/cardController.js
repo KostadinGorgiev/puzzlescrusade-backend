@@ -8,6 +8,12 @@ module.exports = {
     try {
       const user = await db.User.findOne({
         where: { t_user_id: id },
+        include: [
+          {
+            model: db.Cards,
+            required: false,
+          },
+        ],
       });
       if (user) {
         const hero = levelConfig.heros.find((hero) => hero.slug === card_slug);
@@ -42,6 +48,40 @@ module.exports = {
             error: `Not enough coins for unlock card. current balance: ${user.coin_balance} coins need: (${coinsNeed})`,
           });
           return;
+        }
+
+        if (hero.condition) {
+          switch (hero.condition.type) {
+            case "card": {
+              const card = levelConfig.heros.find(
+                (e) => e.slug === hero.condition.targetCard
+              );
+              const userCard = user.Cards.find((e) => e.card_slug === "fennel");
+              if (!card) {
+                res.send({
+                  success: false,
+                  error: `Condition card not defined in config`,
+                });
+                return;
+              }
+              if (!userCard) {
+                res.send({
+                  success: false,
+                  error: `Need ${card.name} card at level ${hero.condition.cardLevel}`,
+                });
+                return;
+              } else {
+                if (userCard.card_level < hero.condition.cardLevel - 1) {
+                  res.send({
+                    success: false,
+                    error: `Need ${card.name} card at level ${hero.condition.cardLevel}`,
+                  });
+                  return;
+                }
+              }
+              break;
+            }
+          }
         }
 
         await db.Cards.create({

@@ -485,6 +485,50 @@
         { "cost": 4892517, "profit": 57921, "increase": 15579 },
         { "cost": 5407616, "profit": 73500, "increase": 0 }
       ]
+    },
+    {
+      "slug": "ruxandra_redtide",
+      "name": "Ruxandra Redtide",
+      "title": "The crimson-haired corsair",
+      "description": "A master of the waves, driven by passion and fury.",
+      "type": "volcano",
+      "level": [
+        { "cost": 5000, "profit": 75, "increase": 21 },
+        { "cost": 2744, "profit": 96, "increase": 26 },
+        { "cost": 13001, "profit": 122, "increase": 34 },
+        { "cost": 32488, "profit": 156, "increase": 41 },
+        { "cost": 101684, "profit": 197, "increase": 54 },
+        { "cost": 218568, "profit": 251, "increase": 67 },
+        { "cost": 297496, "profit": 318, "increase": 86 },
+        { "cost": 388566, "profit": 404, "increase": 110 },
+        { "cost": 491780, "profit": 514, "increase": 138 },
+        { "cost": 607134, "profit": 652, "increase": 176 },
+        { "cost": 734634, "profit": 828, "increase": 222 },
+        { "cost": 874274, "profit": 1050, "increase": 283 },
+        { "cost": 1026059, "profit": 1333, "increase": 359 },
+        { "cost": 1189985, "profit": 1692, "increase": 455 },
+        { "cost": 1366054, "profit": 2147, "increase": 578 },
+        { "cost": 1554266, "profit": 2725, "increase": 733 },
+        { "cost": 1754620, "profit": 3458, "increase": 930 },
+        { "cost": 1967118, "profit": 4388, "increase": 1180 },
+        { "cost": 2191759, "profit": 5568, "increase": 1498 },
+        { "cost": 2428542, "profit": 7066, "increase": 1900 },
+        { "cost": 2677466, "profit": 8966, "increase": 2411 },
+        { "cost": 2938536, "profit": 11377, "increase": 3060 },
+        { "cost": 3211745, "profit": 14437, "increase": 3885 },
+        { "cost": 3497098, "profit": 18322, "increase": 4926 },
+        { "cost": 3794596, "profit": 23248, "increase": 6255 },
+        { "cost": 4104235, "profit": 29503, "increase": 7935 },
+        { "cost": 4426016, "profit": 37438, "increase": 10069 },
+        { "cost": 4882261, "profit": 47507, "increase": 12778 },
+        { "cost": 5451924, "profit": 60285, "increase": 16215 },
+        { "cost": 5775350, "profit": 76500, "increase": 0 }
+      ],
+      "condition": {
+        "type": "card",
+        "targetCard": "fennel",
+        "cardLevel": 12
+      }
     }
   ],
   "heroType": {
