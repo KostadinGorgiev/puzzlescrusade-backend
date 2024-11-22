@@ -287,6 +287,8 @@ module.exports = {
     }
   },
   socketHandler: async function (io, usersMap, userId) {
+    // console.log("here handler for ", userId);
+
     const user = await db.User.findOne({
       where: { t_user_id: userId },
     });

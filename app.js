@@ -77,9 +77,15 @@ const io = new Server(server, {
 });
 io.on("connection", (socket) => {
   socket.on("addUser", (data) => {
-    console.log("addUser", data.userId);
-
     if (data && data.userId) {
+      if (usersMap[data.userId]) {
+        console.log("ternimate_session", data.userId);
+        // ternimate session for multiple device
+        io.to(usersMap[data.userId]).emit("ternimate_session");
+        clearInterval(intervalMap[socket.userId]);
+        delete usersMap[socket.userId];
+        delete intervalMap[socket.userId];
+      }
       socket.userId = data.userId;
       usersMap[data.userId] = socket.id;
       intervalMap[data.userId] = setInterval(() => {
@@ -88,10 +94,11 @@ io.on("connection", (socket) => {
     }
   });
   socket.on("disconnect", () => {
-    console.log("disconnecty", intervalMap[socket.userId]);
-    clearInterval(intervalMap[socket.userId]);
-    delete usersMap[socket.userId];
-    delete intervalMap[socket.userId];
+    if (intervalMap[socket.userId]) {
+      clearInterval(intervalMap[socket.userId]);
+      delete intervalMap[socket.userId];
+    }
+    if (usersMap[socket.userId]) delete usersMap[socket.userId];
   });
 });
 
