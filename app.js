@@ -22,7 +22,6 @@ const cardController = require("./src/controllers/cardController");
 const userControler = require("./src/controllers/userController");
 
 var usersMap = {};
-var intervalMap = {};
 var app = express();
 // var io = socketIo();
 
@@ -77,30 +76,37 @@ const io = new Server(server, {
 });
 io.on("connection", (socket) => {
   socket.on("addUser", (data) => {
+    console.log("user connected");
     if (data && data.userId) {
       if (usersMap[data.userId]) {
-        console.log("ternimate_session", data.userId);
+        console.log("ternimate_session for multiple device", data.userId);
         // ternimate session for multiple device
         io.to(usersMap[data.userId]).emit("ternimate_session");
-        clearInterval(intervalMap[socket.userId]);
         delete usersMap[socket.userId];
-        delete intervalMap[socket.userId];
       }
       socket.userId = data.userId;
       usersMap[data.userId] = socket.id;
-      intervalMap[data.userId] = setInterval(() => {
-        cardController.socketHandler(io, usersMap, data.userId);
-      }, 5000);
     }
+
+    setTimeout(() => {
+      if (usersMap[data.userId]) {
+        console.log("ternimate_session for 1 hr", data.userId);
+        // ternimate session for 1 hr long
+        io.to(usersMap[data.userId]).emit("ternimate_session");
+        delete usersMap[socket.userId];
+      }
+    }, 60 * 60 * 1000); // 1 hr timeout
   });
   socket.on("disconnect", () => {
-    if (intervalMap[socket.userId]) {
-      clearInterval(intervalMap[socket.userId]);
-      delete intervalMap[socket.userId];
-    }
     if (usersMap[socket.userId]) delete usersMap[socket.userId];
   });
 });
+
+setInterval(() => {
+  Object.keys(usersMap).forEach((userId) => {
+    cardController.socketHandler(io, usersMap, userId);
+  });
+}, 5000);
 
 server.listen(port);
 server.on("error", onError);
