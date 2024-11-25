@@ -76,7 +76,7 @@ const io = new Server(server, {
 });
 io.on("connection", (socket) => {
   socket.on("addUser", (data) => {
-    console.log("user connected");
+    console.log("user connected", data.userId);
     if (data && data.userId) {
       if (usersMap[data.userId]) {
         console.log("ternimate_session for multiple device", data.userId);
@@ -98,11 +98,13 @@ io.on("connection", (socket) => {
     }, 60 * 60 * 1000); // 1 hr timeout
   });
   socket.on("disconnect", () => {
+    console.log("user disconnected", socket.userId);
     if (usersMap[socket.userId]) delete usersMap[socket.userId];
   });
 });
 
 setInterval(() => {
+  console.log("socket handler for live session", usersMap);
   Object.keys(usersMap).forEach((userId) => {
     cardController.socketHandler(io, usersMap, userId);
   });
