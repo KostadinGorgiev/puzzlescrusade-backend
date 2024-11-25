@@ -325,7 +325,7 @@ module.exports = {
     return { ...result, serverTime: moment(), isNew };
   },
   getActiveUsers: async function (usersMap) {
-    const ids = Object.keys(usersMap);
+    const ids = usersMap.map((user) => user.userId);
     const users = await db.User.findAll({
       where: {
         t_user_id: {

@@ -286,11 +286,11 @@ module.exports = {
       res.send({ success: false, error: error.message });
     }
   },
-  socketHandler: async function (io, usersMap, userId) {
+  socketHandler: async function (io, socketUser) {
     // console.log("here handler for ", userId);
 
     const user = await db.User.findOne({
-      where: { t_user_id: userId },
+      where: { t_user_id: socketUser.userId },
     });
     if (user) {
       const cards = await db.Cards.findAll({
@@ -319,17 +319,17 @@ module.exports = {
           },
           {
             where: {
-              t_user_id: userId,
+              t_user_id: socketUser.userId,
             },
           }
         );
-        io.to(usersMap[userId]).emit("card_profit", {
-          userId,
+        io.to(socketUser.socketId).emit("card_profit", {
+          user: socketUser.userId,
           coin: coin,
         });
       } else {
-        io.to(usersMap[userId]).emit("card_profit", {
-          userId,
+        io.to(socketUser.socketId).emit("card_profit", {
+          user: socketUser.userId,
           coin: 0,
         });
       }

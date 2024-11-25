@@ -21,7 +21,7 @@ var adminRouter = require("./src/routes/admin");
 const cardController = require("./src/controllers/cardController");
 const userControler = require("./src/controllers/userController");
 
-var usersMap = {};
+var usersMap = [];
 var app = express();
 // var io = socketIo();
 
@@ -68,7 +68,7 @@ app.use(function (err, req, res, next) {
 var port = normalizePort(process.env.PORT || "8080");
 
 var server = http.createServer(app);
-const io = new Server(server, {
+var io = new Server(server, {
   cors: {
     origin: "*", // Allow requests from this origin and my frontend port = 5173
     methods: ["GET", "POST"], // Allow these HTTP methods
@@ -78,35 +78,43 @@ io.on("connection", (socket) => {
   socket.on("addUser", (data) => {
     console.log("user connected", data.userId);
     if (data && data.userId) {
-      if (usersMap[data.userId]) {
-        console.log("ternimate_session for multiple device", data.userId);
+      let existUser = usersMap.find((user) => user.userId == data.userId);
+      if (existUser) {
+        console.log("ternimate_session for multiple device");
         // ternimate session for multiple device
-        io.to(usersMap[data.userId]).emit("ternimate_session");
-        delete usersMap[socket.userId];
+        io.to(existUser.socketId).emit("ternimate_session");
+        usersMap = usersMap.filter((user) => user.userId != existUser.userId);
       }
       socket.userId = data.userId;
-      usersMap[data.userId] = socket.id;
+      usersMap.push({
+        userId: data.userId,
+        socketId: socket.id,
+      });
     }
 
     setTimeout(() => {
-      if (usersMap[data.userId]) {
+      let existUserTerminate = usersMap.find(
+        (user) => user.userId == data.userId && user.socketId == socket.id
+      );
+      if (existUserTerminate) {
         console.log("ternimate_session for 1 hr", data.userId);
         // ternimate session for 1 hr long
-        io.to(usersMap[data.userId]).emit("ternimate_session");
-        delete usersMap[socket.userId];
+        io.to(existUserTerminate.socketId).emit("ternimate_session");
+        usersMap = usersMap.filter((user) => user.userId != existUser.userId);
       }
     }, 60 * 60 * 1000); // 1 hr timeout
   });
+
   socket.on("disconnect", () => {
     console.log("user disconnected", socket.userId);
-    if (usersMap[socket.userId]) delete usersMap[socket.userId];
+    usersMap = usersMap.filter((user) => user.userId != socket.userId);
   });
 });
 
 setInterval(() => {
   console.log("socket handler for live session", usersMap);
-  Object.keys(usersMap).forEach((userId) => {
-    cardController.socketHandler(io, usersMap, userId);
+  usersMap.forEach((user) => {
+    cardController.socketHandler(io, user);
   });
 }, 5000);
 
