@@ -2,6 +2,7 @@ const moment = require("moment");
 const userController = require("../controllers/userController");
 const db = require("../database/models");
 const levelConfig = require("../config/config.json");
+const { Op } = require("sequelize");
 
 module.exports = {
   complete: async function (req, res) {
@@ -223,11 +224,48 @@ module.exports = {
 
     return res.send({ success: true });
   },
+  update: async function (req, res) {
+    const { id, title, link, type, bonus_amount } = req.body;
+    await db.Task.update(
+      {
+        title,
+        link,
+        type,
+        bonus_amount,
+      },
+      {
+        where: {
+          id: id,
+        },
+      }
+    );
+
+    return res.send({ success: true });
+  },
+  delete: async function (req, res) {
+    const { ids } = req.body;
+    await db.Task.destroy({
+      where: {
+        id: {
+          [Op.in]: ids,
+        },
+      },
+    });
+
+    return res.send({ success: true });
+  },
   get: async function (req, res) {
     let response = await db.Task.findAll({
       order: [["createdAt", "DESC"]],
     });
 
     return res.send({ success: true, tasks: response });
+  },
+  getUsersTask: async function (req, res) {
+    let response = await db.UserTaskStatus.findAll({
+      order: [["createdAt", "DESC"]],
+    });
+
+    return res.send({ success: true, userTasks: response });
   },
 };
