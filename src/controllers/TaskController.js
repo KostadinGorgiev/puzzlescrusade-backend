@@ -6,69 +6,47 @@ const { Op } = require("sequelize");
 
 module.exports = {
   complete: async function (req, res) {
-    const { user_id, task_type, dynamic, task_id } = req.body;
+    const { user_id, task_id } = req.body;
     const user = await db.User.findOne({
       where: { t_user_id: user_id },
     });
     if (user) {
-      if (dynamic) {
-        let userTask = await db.UserTaskStatus.findOne({
-          where: {
-            user_id: user.id,
-            task_id: task_id,
-          },
-        });
-        if (userTask) {
-          if (userTask.status === "done") {
-            res.send({ success: false, message: "Task already done" });
-          } else if (userTask.status === "claim") {
-            res.send({
-              success: false,
-              message: "Task already completed, need to claim",
-            });
-          } else {
-            res.send({
-              success: false,
-              message: "Task already exist",
-            });
-          }
-          return;
+      let userTask = await db.UserTaskStatus.findOne({
+        where: {
+          user_id: user.id,
+          task_id: task_id,
+        },
+      });
+      if (userTask) {
+        if (userTask.status === "done") {
+          res.send({ success: false, message: "Task already done" });
+        } else if (userTask.status === "claim") {
+          res.send({
+            success: false,
+            message: "Task already completed, need to claim",
+          });
         } else {
-          await db.UserTaskStatus.create({
-            user_id: user.id,
-            task_id: task_id,
-            status: "claim",
+          res.send({
+            success: false,
+            message: "Task already exist",
           });
         }
+        return;
       } else {
-        let task = await db.TaskStatus.findOne({
+        let task = await db.Task.findOne({
           where: {
-            user_id: user.id,
-            task: task_type,
+            id: task_id,
           },
         });
-        if (task) {
-          if (task.status === "done") {
-            res.send({ success: false, message: "Task already done" });
-          } else if (task.status === "claim") {
-            res.send({
-              success: false,
-              message: "Task already completed, need to claim",
-            });
-          } else {
-            res.send({
-              success: false,
-              message: "Task already exist",
-            });
-          }
-          return;
-        } else {
-          await db.TaskStatus.create({
-            user_id: user.id,
-            task: task_type,
-            status: "claim",
-          });
+        let createParam = {
+          user_id: user.id,
+          task_id: task_id,
+          status: "claim",
+        };
+        if (task.password && task.password != "") {
+          createParam.status = "verify";
         }
+        await db.UserTaskStatus.create(createParam);
       }
       res.send({ success: true, message: "Task completed" });
     } else {
@@ -76,98 +54,90 @@ module.exports = {
     }
     return;
   },
-  claim: async function (req, res) {
-    const { user_id, task_type, dynamic, task_id } = req.body;
+  verifyPassword: async function (req, res) {
+    const { user_id, task_id, password } = req.body;
     const user = await db.User.findOne({
       where: { t_user_id: user_id },
     });
-    if (user) {
-      if (dynamic) {
-        let userTask = await db.UserTaskStatus.findOne({
+    const task = await db.Task.findOne({
+      where: { id: task_id },
+    });
+
+    if (!user) {
+      res.send({ success: false, message: "User not found" });
+      return;
+    }
+    if (!task) {
+      res.send({ success: false, message: "Task not found" });
+      return;
+    }
+    if (task.password !== password) {
+      res.send({ success: false, message: "Password incorrect" });
+      return;
+    }
+
+    let userTask = await db.UserTaskStatus.findOne({
+      where: {
+        user_id: user.id,
+        task_id: task_id,
+      },
+    });
+    if (userTask) {
+      await db.UserTaskStatus.update(
+        {
+          status: "claim",
+        },
+        {
           where: {
             user_id: user.id,
             task_id: task_id,
           },
-        });
-        if (userTask) {
-          if (userTask.status === "done") {
-            res.send({ success: false, message: "Task already done" });
-          } else if (userTask.status === "claim") {
-            let dTask = await db.Task.findOne({
-              where: {
-                id: task_id,
-              },
-            });
-            if (dTask) {
-              await db.UserTaskStatus.update(
-                {
-                  status: "done",
-                },
-                {
-                  where: {
-                    user_id: user.id,
-                    task_id: task_id,
-                  },
-                }
-              );
-              await db.User.update(
-                {
-                  coin_balance: user.coin_balance + dTask.bonus_amount,
-                  level_point: user.level_point + dTask.bonus_amount,
-                },
-                {
-                  where: { t_user_id: user_id },
-                }
-              );
-
-              res.send({
-                success: true,
-                message: "Task claimed",
-              });
-            } else {
-              res.send({
-                success: false,
-                message: "Task not exist",
-              });
-            }
-          } else {
-            res.send({
-              success: false,
-              message: "Task need to be completed",
-            });
-          }
-          return;
-        } else {
-          res.send({ success: false, message: "Task not found" });
         }
-      } else {
-        let task = await db.TaskStatus.findOne({
-          where: {
-            user_id: user.id,
-            task: task_type,
-          },
-        });
-        if (task) {
-          if (task.status === "done") {
-            res.send({ success: false, message: "Task already done" });
-          } else if (task.status === "claim") {
-            await db.TaskStatus.update(
+      );
+      res.send({ success: true, message: "Successfully verified" });
+      return;
+    } else {
+      res.send({ success: false, message: "User didn't start task" });
+      return;
+    }
+  },
+  claim: async function (req, res) {
+    const { user_id, task_id } = req.body;
+    const user = await db.User.findOne({
+      where: { t_user_id: user_id },
+    });
+    if (user) {
+      let userTask = await db.UserTaskStatus.findOne({
+        where: {
+          user_id: user.id,
+          task_id: task_id,
+        },
+      });
+      if (userTask) {
+        if (userTask.status === "done") {
+          res.send({ success: false, message: "Task already done" });
+        } else if (userTask.status === "claim") {
+          let dTask = await db.Task.findOne({
+            where: {
+              id: task_id,
+            },
+          });
+          if (dTask) {
+            await db.UserTaskStatus.update(
               {
                 status: "done",
               },
               {
                 where: {
                   user_id: user.id,
-                  task: task_type,
+                  task_id: task_id,
                 },
               }
             );
             await db.User.update(
               {
-                coin_balance:
-                  user.coin_balance + levelConfig.taskBonus[task_type],
-                level_point:
-                  user.level_point + levelConfig.taskBonus[task_type],
+                coin_balance: user.coin_balance + dTask.bonus_amount,
+                level_point: user.level_point + dTask.bonus_amount,
               },
               {
                 where: { t_user_id: user_id },
@@ -181,13 +151,18 @@ module.exports = {
           } else {
             res.send({
               success: false,
-              message: "Task need to be completed",
+              message: "Task not exist",
             });
           }
-          return;
         } else {
-          res.send({ success: false, message: "Task not found" });
+          res.send({
+            success: false,
+            message: "Task need to be completed",
+          });
         }
+        return;
+      } else {
+        res.send({ success: false, message: "Task not found" });
       }
       res.send({ success: true, message: "Task claimed" });
     } else {
@@ -214,24 +189,26 @@ module.exports = {
     return;
   },
   add: async function (req, res) {
-    const { title, link, type, bonus_amount } = req.body;
+    const { title, link, type, bonus_amount, password } = req.body;
     await db.Task.create({
       title,
       link,
       type,
       bonus_amount,
+      password,
     });
 
     return res.send({ success: true });
   },
   update: async function (req, res) {
-    const { id, title, link, type, bonus_amount } = req.body;
+    const { id, title, link, type, bonus_amount, password } = req.body;
     await db.Task.update(
       {
         title,
         link,
         type,
         bonus_amount,
+        password,
       },
       {
         where: {
