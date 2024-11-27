@@ -71,7 +71,7 @@ module.exports = {
       res.send({ success: false, message: "Task not found" });
       return;
     }
-    if (task.password !== password) {
+    if (task.password.toLowerCase() !== password.toLowerCase()) {
       res.send({ success: false, message: "Password incorrect" });
       return;
     }
@@ -189,19 +189,21 @@ module.exports = {
     return;
   },
   add: async function (req, res) {
-    const { title, link, type, bonus_amount, password } = req.body;
+    const { title, link, type, bonus_amount, password, question } = req.body;
     await db.Task.create({
       title,
       link,
       type,
       bonus_amount,
       password,
+      question,
     });
 
     return res.send({ success: true });
   },
   update: async function (req, res) {
-    const { id, title, link, type, bonus_amount, password } = req.body;
+    const { id, title, link, type, bonus_amount, password, question } =
+      req.body;
     await db.Task.update(
       {
         title,
@@ -209,6 +211,7 @@ module.exports = {
         type,
         bonus_amount,
         password,
+        question,
       },
       {
         where: {
