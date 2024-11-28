@@ -464,6 +464,40 @@
         "targetCard": "fennel",
         "cardLevel": 12
       }
+    },
+    {
+      "slug": "rakani",
+      "name": "Rakani",
+      "title": "The Grove Guardian",
+      "description": "A jungle healer, binding foes and healing his kin with nature’s grace.",
+      "type": "forest",
+      "level": [
+        { "cost": 5000, "profit": 41, "increase": 1 },
+        { "cost": 272, "profit": 42, "increase": 3 },
+        { "cost": 316, "profit": 45, "increase": 3 },
+        { "cost": 387, "profit": 48, "increase": 3 },
+        { "cost": 491, "profit": 51, "increase": 4 },
+        { "cost": 660, "profit": 55, "increase": 4 },
+        { "cost": 931, "profit": 59, "increase": 4 },
+        { "cost": 1381, "profit": 63, "increase": 4 },
+        { "cost": 2121, "profit": 67, "increase": 6 },
+        { "cost": 3474, "profit": 73, "increase": 4 },
+        { "cost": 5974, "profit": 77, "increase": 5 },
+        { "cost": 10658, "profit": 82, "increase": 7 },
+        { "cost": 20231, "profit": 89, "increase": 5 },
+        { "cost": 40128, "profit": 94, "increase": 7 },
+        { "cost": 84756, "profit": 101, "increase": 8 },
+        { "cost": 186235, "profit": 109, "increase": 8 },
+        { "cost": 425139, "profit": 117, "increase": 4 },
+        { "cost": 921412, "profit": 121, "increase": 4 },
+        { "cost": 1325412, "profit": 125, "increase": 2 },
+        { "cost": 2987123, "profit": 127, "increase": 0 }
+      ],
+      "condition": {
+        "type": "card",
+        "targetCard": "morgath",
+        "cardLevel": 5
+      }
     }
   ],
   "heroType": {
