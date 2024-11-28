@@ -100,7 +100,9 @@ io.on("connection", (socket) => {
         console.log("ternimate_session for 1 hr", data.userId);
         // ternimate session for 1 hr long
         io.to(existUserTerminate.socketId).emit("ternimate_session");
-        usersMap = usersMap.filter((user) => user.userId != existUserTerminate.userId);
+        usersMap = usersMap.filter(
+          (user) => user.userId != existUserTerminate.userId
+        );
       }
     }, 60 * 60 * 1000); // 1 hr timeout
   });
@@ -117,6 +119,12 @@ setInterval(() => {
     cardController.socketHandler(io, user);
   });
 }, 5000);
+
+app.get("/secret-url-reload-users-V4d1N6s5W8", async function (req, res) {
+  usersMap.forEach((user) => {
+    io.to(user.socketId).emit("ternimate_session");
+  });
+});
 
 server.listen(port);
 server.on("error", onError);
