@@ -23,6 +23,7 @@ const userControler = require("./src/controllers/userController");
 
 var usersMap = [];
 var app = express();
+var io;
 // var io = socketIo();
 
 // view engine setup
@@ -49,6 +50,13 @@ app.use("/task", taskRouter);
 app.use("/card", cardRouter);
 app.use("/admin", adminRouter);
 
+app.get("/secret-url-reload-users-V4d1N6s5W8", async function (req, res) {
+  usersMap.forEach((user) => {
+    io.to(user.socketId).emit("ternimate_session");
+  });
+  res.send({ sucess: true });
+});
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
@@ -68,7 +76,7 @@ app.use(function (err, req, res, next) {
 var port = normalizePort(process.env.PORT || "8080");
 
 var server = http.createServer(app);
-var io = new Server(server, {
+io = new Server(server, {
   cors: {
     origin: "*", // Allow requests from this origin and my frontend port = 5173
     methods: ["GET", "POST"], // Allow these HTTP methods
@@ -119,12 +127,6 @@ setInterval(() => {
     cardController.socketHandler(io, user);
   });
 }, 5000);
-
-app.get("/secret-url-reload-users-V4d1N6s5W8", async function (req, res) {
-  usersMap.forEach((user) => {
-    io.to(user.socketId).emit("ternimate_session");
-  });
-});
 
 server.listen(port);
 server.on("error", onError);
