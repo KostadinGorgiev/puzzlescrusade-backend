@@ -321,8 +321,9 @@ module.exports = {
         user_id: result.id,
       },
     });
+    const serverTimezone = moment.tz.guess();
 
-    return { ...result, serverTime: moment(), isNew };
+    return { ...result, serverTime: moment(), isNew, serverTimezone };
   },
   getActiveUsers: async function (usersMap) {
     const ids = usersMap.map((user) => user.userId);

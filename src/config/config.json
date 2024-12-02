@@ -498,6 +498,40 @@
         "targetCard": "morgath",
         "cardLevel": 5
       }
+    },
+    {
+      "slug": "splash",
+      "name": "Splash",
+      "title": "The Sea Wanderer",
+      "description": "A fearless and agile explorer of the deep.",
+      "type": "ocean",
+      "level": [
+        { "cost": 5000, "profit": 77, "increase": 5 },
+        { "cost": 1360, "profit": 82, "increase": 5 },
+        { "cost": 1498, "profit": 87, "increase": 6 },
+        { "cost": 1745, "profit": 93, "increase": 6 },
+        { "cost": 2244, "profit": 99, "increase": 6 },
+        { "cost": 2963, "profit": 105, "increase": 7 },
+        { "cost": 3881, "profit": 112, "increase": 7 },
+        { "cost": 5813, "profit": 119, "increase": 8 },
+        { "cost": 8888, "profit": 127, "increase": 9 },
+        { "cost": 14215, "profit": 136, "increase": 9 },
+        { "cost": 24008, "profit": 145, "increase": 9 },
+        { "cost": 43127, "profit": 154, "increase": 11 },
+        { "cost": 81712, "profit": 165, "increase": 18 },
+        { "cost": 160774, "profit": 183, "increase": 12 },
+        { "cost": 333445, "profit": 195, "increase": 16 },
+        { "cost": 720258, "profit": 211, "increase": 10 },
+        { "cost": 1527100, "profit": 221, "increase": 27 },
+        { "cost": 3956325, "profit": 248, "increase": 17 },
+        { "cost": 6214887, "profit": 265, "increase": 57 },
+        { "cost": 11587228, "profit": 322, "increase": 0 }
+      ],
+      "condition": {
+        "type": "referral",
+        "launchTime": "2024-12-02T18:15:31.158Z",
+        "count": 1
+      }
     }
   ],
   "heroType": {

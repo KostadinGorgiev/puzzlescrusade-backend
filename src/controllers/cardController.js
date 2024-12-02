@@ -14,6 +14,27 @@ module.exports = {
             required: false,
           },
         ],
+        include: [
+          {
+            model: db.Referral,
+            required: false,
+            include: [
+              {
+                model: db.User,
+                required: false,
+                attributes: [
+                  "id",
+                  "t_user_id",
+                  "first_name",
+                  "last_name",
+                  "username",
+                  "coin_balance",
+                  "level_point",
+                ],
+              },
+            ],
+          },
+        ],
       });
       if (user) {
         const hero = levelConfig.heros.find((hero) => hero.slug === card_slug);
@@ -80,6 +101,26 @@ module.exports = {
                 }
               }
               break;
+            }
+            case "referral": {
+              let count = 0;
+              user.Referrals.forEach((referral) => {
+                if (
+                  moment(referral.createdAt).isAfter(
+                    moment(hero.condition.launchTime),
+                    "seconds"
+                  )
+                ) {
+                  count++;
+                }
+              });
+              if (count < hero.condition.count) {
+                res.send({
+                  success: false,
+                  error: `Invite ${hero.condition.count} more friend`,
+                });
+                return;
+              }
             }
           }
         }

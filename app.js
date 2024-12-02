@@ -7,6 +7,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var cors = require("cors");
 const dotenv = require("dotenv");
+const moment = require('moment-timezone');
 
 dotenv.config();
 
@@ -42,7 +43,9 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", async function (req, res) {
   let activeUsers = await userControler.getActiveUsers(usersMap);
-  res.send({ status: "success", message: "app is running...", activeUsers });
+  const serverTimezone = moment.tz.guess(); // Gets the server's timezone
+
+  res.send({ status: "success", message: "app is running...", activeUsers, serverTimezone });
 });
 app.use("/users", usersRouter);
 app.use("/daily-checkin", dailyCheckInRouter);
