@@ -532,6 +532,40 @@
         "launchTime": "2024-12-02T18:15:31.158Z",
         "count": 1
       }
+    },
+    {
+      "slug": "elara",
+      "name": "Elara",
+      "title": "The Mystical Sorceress",
+      "description": "A powerful spellcaster, wielding dark magic and secrets.",
+      "type": "light",
+      "level": [
+        { "cost": 5000, "profit": 44, "increase": 3 },
+        { "cost": 336, "profit": 47, "increase": 3 },
+        { "cost": 418, "profit": 50, "increase": 3 },
+        { "cost": 490, "profit": 53, "increase": 3 },
+        { "cost": 619, "profit": 56, "increase": 4 },
+        { "cost": 821, "profit": 60, "increase": 4 },
+        { "cost": 1145, "profit": 64, "increase": 4 },
+        { "cost": 1680, "profit": 68, "increase": 5 },
+        { "cost": 2592, "profit": 73, "increase": 5 },
+        { "cost": 4207, "profit": 78, "increase": 5 },
+        { "cost": 7177, "profit": 83, "increase": 5 },
+        { "cost": 12869, "profit": 88, "increase": 6 },
+        { "cost": 24120, "profit": 94, "increase": 6 },
+        { "cost": 47854, "profit": 100, "increase": 7 },
+        { "cost": 99124, "profit": 107, "increase": 7 },
+        { "cost": 216521, "profit": 114, "increase": 8 },
+        { "cost": 495369, "profit": 122, "increase": 8 },
+        { "cost": 1187323, "profit": 130, "increase": 9 },
+        { "cost": 3024165, "profit": 139, "increase": 10 },
+        { "cost": 5187964, "profit": 149, "increase": 0 }
+      ],
+      "condition": {
+        "type": "card",
+        "targetCard": "jack",
+        "cardLevel": 4
+      }
     }
   ],
   "heroType": {
