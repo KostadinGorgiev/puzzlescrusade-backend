@@ -13,8 +13,6 @@ module.exports = {
             model: db.Cards,
             required: false,
           },
-        ],
-        include: [
           {
             model: db.Referral,
             required: false,
@@ -77,7 +75,10 @@ module.exports = {
               const card = levelConfig.heros.find(
                 (e) => e.slug === hero.condition.targetCard
               );
+              console.log('here', user);
+              
               const userCard = user.Cards.find((e) => e.card_slug === "fennel");
+              console.log('here');
               if (!card) {
                 res.send({
                   success: false,
