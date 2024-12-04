@@ -1,4 +1,5 @@
 const { default: axios } = require("axios");
+const levelConfig = require("../config/config.json");
 
 module.exports = {
   getUserProfilePhotos: async function (botToken, userId) {
@@ -63,5 +64,15 @@ module.exports = {
       console.log("No profile photos found for this user.");
       return null;
     }
+  },
+
+  userLevel: function (level_point) {
+    let currentLevelIndex = levelConfig.level.findIndex(
+      (level) => level.from <= level_point && level.to > level_point
+    );
+    return {
+      ...levelConfig.level[currentLevelIndex],
+      index: currentLevelIndex,
+    };
   },
 };
