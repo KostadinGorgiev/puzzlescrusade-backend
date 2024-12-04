@@ -566,6 +566,40 @@
         "targetCard": "jack",
         "cardLevel": 4
       }
+    },
+    {
+      "slug": "aqualon",
+      "name": "Aqualon",
+      "title": "Lord of the Tides",
+      "description": "A guardian of lost relics, watching over the ocean’s darkest depths.",
+      "type": "ocean",
+      "level": [
+        { "cost": 5000, "profit": 85, "increase": 6 },
+        { "cost": 1203, "profit": 91, "increase": 6 },
+        { "cost": 1376, "profit": 97, "increase": 6 },
+        { "cost": 1651, "profit": 103, "increase": 7 },
+        { "cost": 2081, "profit": 110, "increase": 7 },
+        { "cost": 2753, "profit": 117, "increase": 8 },
+        { "cost": 3833, "profit": 125, "increase": 8 },
+        { "cost": 5616, "profit": 133, "increase": 9 },
+        { "cost": 8657, "profit": 142, "increase": 10 },
+        { "cost": 14039, "profit": 152, "increase": 10 },
+        { "cost": 23640, "profit": 162, "increase": 11 },
+        { "cost": 42613, "profit": 173, "increase": 12 },
+        { "cost": 80330, "profit": 185, "increase": 13 },
+        { "cost": 159221, "profit": 198, "increase": 13 },
+        { "cost": 331088, "profit": 211, "increase": 15 },
+        { "cost": 720363, "profit": 226, "increase": 15 },
+        { "cost": 1562147, "profit": 241, "increase": 17 },
+        { "cost": 3865412, "profit": 258, "increase": 18 },
+        { "cost": 6125441, "profit": 276, "increase": 19 },
+        { "cost": 10698122, "profit": 295, "increase": 0 }
+      ],
+      "condition": {
+        "type": "card",
+        "targetCard": "splash",
+        "cardLevel": 6
+      }
     }
   ],
   "heroType": {
