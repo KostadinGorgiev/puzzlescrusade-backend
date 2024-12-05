@@ -77,7 +77,7 @@ module.exports = {
               );
               console.log('here', user);
               
-              const userCard = user.Cards.find((e) => e.card_slug === "fennel");
+              const userCard = user.Cards.find((e) => e.card_slug === card?.slug);
               console.log('here');
               if (!card) {
                 res.send({
