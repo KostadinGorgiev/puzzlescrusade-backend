@@ -7,7 +7,7 @@ const { userLevel } = require("../utils/func");
 
 module.exports = {
   getUserReports: async function (req, res) {
-    const page = req.query.params || 1;
+    const page = req.query.page || 1;
     const levelPoint = req.query.level_point;
 
     let where = {};
