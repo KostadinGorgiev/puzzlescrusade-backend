@@ -14,7 +14,7 @@ module.exports = {
     if (levelPoint) {
       let level = userLevel(levelPoint);
       where = {
-        coin_balance: {
+        level_point: {
           [Op.gte]: level.from,
           [Op.lt]: level.to,
         },
@@ -26,6 +26,9 @@ module.exports = {
       order: [["level_point", "DESC"]],
       limit: 10,
       offset: (page - 1) * 10,
+      where: where,
+    });
+    result.total_count = await db.User.count({
       where: where,
     });
     result.counts = [];
