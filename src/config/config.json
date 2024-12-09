@@ -668,6 +668,40 @@
         "targetCard": "veldar",
         "cardLevel": 11
       }
+    },
+    {
+      "slug": "darius_stormblade",
+      "name": "Darius Stormblade",
+      "title": "The courageous swordsman.",
+      "description": "A warrior sworn to justice, unshaken by battle or fear.",
+      "type": "light",
+      "level": [
+        { "cost": 5000, "profit": 45, "increase": 3 },
+        { "cost": 601, "profit": 48, "increase": 3 },
+        { "cost": 688, "profit": 51, "increase": 3 },
+        { "cost": 726, "profit": 54, "increase": 3 },
+        { "cost": 1040, "profit": 57, "increase": 4 },
+        { "cost": 1377, "profit": 61, "increase": 4 },
+        { "cost": 1917, "profit": 65, "increase": 4 },
+        { "cost": 2808, "profit": 69, "increase": 5 },
+        { "cost": 4329, "profit": 74, "increase": 5 },
+        { "cost": 7019, "profit": 79, "increase": 5 },
+        { "cost": 11970, "profit": 84, "increase": 5 },
+        { "cost": 21457, "profit": 89, "increase": 6 },
+        { "cost": 40415, "profit": 95, "increase": 6 },
+        { "cost": 79970, "profit": 101, "increase": 7 },
+        { "cost": 166199, "profit": 108, "increase": 7 },
+        { "cost": 362731, "profit": 115, "increase": 8 },
+        { "cost": 831323, "profit": 123, "increase": 8 },
+        { "cost": 2000607, "profit": 131, "increase": 9 },
+        { "cost": 5055357, "profit": 140, "increase": 9 },
+        { "cost": 8710886, "profit": 149, "increase": 0 }
+      ],
+      "condition": {
+        "type": "card",
+        "targetCard": "morgath",
+        "cardLevel": 14
+      }
     }
   ],
   "heroType": {
