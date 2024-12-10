@@ -1,5 +1,6 @@
 const { default: axios } = require("axios");
 const levelConfig = require("../config/config.json");
+const TelegramBot = require("node-telegram-bot-api");
 
 module.exports = {
   getUserProfilePhotos: async function (botToken, userId) {
@@ -18,7 +19,56 @@ module.exports = {
       return null;
     }
   },
+  getTelegramGroupId: async function (botToken, chat_id) {
+    const url = `https://api.telegram.org/bot${botToken}/getChat?chat_id=@${chat_id}`;
+    try {
+      const response = await axios.get(url);
+      const data = response.data;
 
+      if (data.ok) {
+        return data.result;
+      } else {
+        throw new Error(
+          "Error fetching telegram group info: " + data.description
+        );
+      }
+    } catch (error) {
+      console.error("Fetch Error:", error.message);
+      return null;
+    }
+  },
+  checkTelegramUser: async function (botToken, userId, chat_id) {
+    let group = await module.exports.getTelegramGroupId(botToken, chat_id);
+
+    if (!group) return false;
+    const bot = new TelegramBot(botToken);
+    console.log(botToken, group.id, userId);
+
+    // Replace with your group chat ID and user ID
+    const chatId = group.id; // e.g., -123456789
+
+    try {
+      const chatMember = await bot.getChatMember(chatId, userId);
+      if (
+        chatMember.status === "member" ||
+        chatMember.status === "administrator" ||
+        chatMember.status === "creator"
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      if (error.response && error.response.error_code === 400) {
+        // console.log(
+        //   "The user is not in the group or the bot doesn't have permission to see this information."
+        // );
+      } else {
+        // console.error("An error occurred:", error);
+      }
+      return false;
+    }
+  },
   getUserProfilePhotos: async function (botToken, userId) {
     const url = `https://api.telegram.org/bot${botToken}/getUserProfilePhotos?user_id=${userId}`;
     try {

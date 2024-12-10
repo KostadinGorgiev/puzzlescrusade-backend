@@ -1,8 +1,10 @@
 const moment = require("moment");
 const userController = require("../controllers/userController");
 const db = require("../database/models");
+const TelegramBot = require("node-telegram-bot-api");
 const levelConfig = require("../config/config.json");
 const { Op } = require("sequelize");
+const { getTelegramGroupId, checkTelegramUser } = require("../utils/func");
 
 module.exports = {
   complete: async function (req, res) {
@@ -123,6 +125,24 @@ module.exports = {
             },
           });
           if (dTask) {
+            if (dTask.type == "telegram") {
+              let chatId = dTask.link.split("https://t.me/")[1];
+              // console.log(process.env.BOT_TOKEN, user.t_user_id, chatId);
+
+              const isMemeber = await checkTelegramUser(
+                process.env.BOT_TOKEN,
+                user.t_user_id,
+                chatId
+              );
+              if (!isMemeber) {
+                res.send({
+                  success: false,
+                  tgMember: false,
+                  message: "Didn't join telegram group",
+                });
+                return;
+              }
+            }
             await db.UserTaskStatus.update(
               {
                 status: "done",
@@ -247,5 +267,40 @@ module.exports = {
     });
 
     return res.send({ success: true, userTasks: response });
+  },
+  testFunction: async function (req, res) {
+    let group = await getTelegramGroupId(
+      process.env.BOT_TOKEN,
+      "puzzlescrusade"
+    );
+
+    const bot = new TelegramBot(process.env.BOT_TOKEN);
+
+    // Replace with your group chat ID and user ID
+    const chatId = group.id; // e.g., -123456789
+    const userId = "6469354442"; // e.g., 123456789
+
+    try {
+      const chatMember = await bot.getChatMember(chatId, userId);
+      console.log("group = ", chatMember);
+      if (
+        chatMember.status === "member" ||
+        chatMember.status === "administrator" ||
+        chatMember.status === "creator"
+      ) {
+        console.log(`${userId} is a member of the group.`);
+      } else {
+        console.log(`${userId} is not a member of the group.`);
+      }
+    } catch (error) {
+      if (error.response && error.response.error_code === 400) {
+        console.log(
+          "The user is not in the group or the bot doesn't have permission to see this information."
+        );
+      } else {
+        console.error("An error occurred:", error);
+      }
+    }
+    res.send({ success: true });
   },
 };
