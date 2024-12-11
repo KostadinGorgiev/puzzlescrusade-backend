@@ -710,7 +710,7 @@
       "description": "A jubilant hero, raising spirits and shattering foes.",
       "type": "volcano",
       "level": [
-        { "cost": 970, "profit": 79, "increase": 6 },
+        { "cost": 5000, "profit": 79, "increase": 6 },
         { "cost": 1073, "profit": 85, "increase": 6 },
         { "cost": 1246, "profit": 91, "increase": 6 },
         { "cost": 1521, "profit": 97, "increase": 7 },
