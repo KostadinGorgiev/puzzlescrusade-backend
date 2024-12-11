@@ -702,6 +702,40 @@
         "targetCard": "morgath",
         "cardLevel": 14
       }
+    },
+    {
+      "slug": "thalric",
+      "name": "Thalric",
+      "title": "The Toasting Titan",
+      "description": "A jubilant hero, raising spirits and shattering foes.",
+      "type": "volcano",
+      "level": [
+        { "cost": 970, "profit": 79, "increase": 6 },
+        { "cost": 1073, "profit": 85, "increase": 6 },
+        { "cost": 1246, "profit": 91, "increase": 6 },
+        { "cost": 1521, "profit": 97, "increase": 7 },
+        { "cost": 1950, "profit": 104, "increase": 7 },
+        { "cost": 2633, "profit": 111, "increase": 8 },
+        { "cost": 3703, "profit": 119, "increase": 8 },
+        { "cost": 5486, "profit": 127, "increase": 9 },
+        { "cost": 8527, "profit": 136, "increase": 10 },
+        { "cost": 13909, "profit": 146, "increase": 10 },
+        { "cost": 23810, "profit": 156, "increase": 11 },
+        { "cost": 42783, "profit": 167, "increase": 12 },
+        { "cost": 80700, "profit": 179, "increase": 13 },
+        { "cost": 159801, "profit": 192, "increase": 13 },
+        { "cost": 332267, "profit": 205, "increase": 15 },
+        { "cost": 725333, "profit": 220, "increase": 15 },
+        { "cost": 1662515, "profit": 235, "increase": 17 },
+        { "cost": 4001100, "profit": 252, "increase": 18 },
+        { "cost": 6705134, "profit": 270, "increase": 19 },
+        { "cost": 11798149, "profit": 289, "increase": 0 }
+      ],
+      "condition": {
+        "type": "card",
+        "targetCard": "jack",
+        "cardLevel": 7
+      }
     }
   ],
   "heroType": {

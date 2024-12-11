@@ -37,35 +37,20 @@ module.exports = {
       return null;
     }
   },
-  checkTelegramUser: async function (botToken, userId, chat_id) {
-    let group = await module.exports.getTelegramGroupId(botToken, chat_id);
-
-    if (!group) return false;
-    const bot = new TelegramBot(botToken);
-    console.log(botToken, group.id, userId);
-
-    // Replace with your group chat ID and user ID
-    const chatId = group.id; // e.g., -123456789
-
+  checkTelegramUserReplied: async function (botToken, userId, chatId, messageId) {
+    const url = `https://api.telegram.org/bot${botToken}/getMessage?chat_id=${chatId}&message_id=${messageId}`;
     try {
-      const chatMember = await bot.getChatMember(chatId, userId);
-      if (
-        chatMember.status === "member" ||
-        chatMember.status === "administrator" ||
-        chatMember.status === "creator"
-      ) {
-        return true;
-      } else {
-        return false;
+      const response = await axios.get(url);
+      const message = response.data.result;
+
+      // Check if the message has replies
+      if (message.reply_to_message) {
+        // Check if the user who replied matches the userId we're looking for
+        return message.from.id === userId;
       }
+      return false;
     } catch (error) {
-      if (error.response && error.response.error_code === 400) {
-        // console.log(
-        //   "The user is not in the group or the bot doesn't have permission to see this information."
-        // );
-      } else {
-        // console.error("An error occurred:", error);
-      }
+      console.error("Error checking user reply:", error.message);
       return false;
     }
   },
