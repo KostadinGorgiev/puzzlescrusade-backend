@@ -736,6 +736,40 @@
         "targetCard": "jack",
         "cardLevel": 7
       }
+    },
+    {
+      "slug": "felwyn",
+      "name": "Felwyn",
+      "title": "The Twilight Wanderer",
+      "description": "A nomadic guardian, loyal to no master",
+      "type": "dark",
+      "level": [
+        { "cost": 5000, "profit": 60, "increase": 4 },
+        { "cost": 661, "profit": 64, "increase": 5 },
+        { "cost": 738, "profit": 69, "increase": 5 },
+        { "cost": 876, "profit": 74, "increase": 5 },
+        { "cost": 1090, "profit": 79, "increase": 5 },
+        { "cost": 1427, "profit": 84, "increase": 6 },
+        { "cost": 1967, "profit": 90, "increase": 6 },
+        { "cost": 2858, "profit": 96, "increase": 7 },
+        { "cost": 4379, "profit": 103, "increase": 7 },
+        { "cost": 7069, "profit": 110, "increase": 8 },
+        { "cost": 12020, "profit": 118, "increase": 8 },
+        { "cost": 21507, "profit": 126, "increase": 9 },
+        { "cost": 40465, "profit": 135, "increase": 10 },
+        { "cost": 80020, "profit": 145, "increase": 10 },
+        { "cost": 112333, "profit": 155, "increase": 11 },
+        { "cost": 362789, "profit": 166, "increase": 11 },
+        { "cost": 831654, "profit": 177, "increase": 13 },
+        { "cost": 2000222, "profit": 190, "increase": 13 },
+        { "cost": 3352784, "profit": 203, "increase": 14 },
+        { "cost": 5874400, "profit": 217, "increase": 0 }
+      ],
+      "condition": {
+        "type": "card",
+        "targetCard": "rakani",
+        "cardLevel": 14
+      }
     }
   ],
   "heroType": {
