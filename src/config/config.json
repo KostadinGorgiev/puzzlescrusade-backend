@@ -770,6 +770,40 @@
         "targetCard": "rakani",
         "cardLevel": 14
       }
+    },
+    {
+      "slug": "zira",
+      "name": "Zira",
+      "title": "The Stealthy Assassin",
+      "description": "A clever infiltrator, using disguise and stealth to achieve her goals.",
+      "type": "volcano",
+      "level": [
+        { "cost": 5000, "profit": 45, "increase": 5 },
+        { "cost": 571, "profit": 50, "increase": 4 },
+        { "cost": 685, "profit": 54, "increase": 3 },
+        { "cost": 801, "profit": 57, "increase": 4 },
+        { "cost": 1024, "profit": 61, "increase": 5 },
+        { "cost": 1352, "profit": 66, "increase": 4 },
+        { "cost": 1897, "profit": 70, "increase": 5 },
+        { "cost": 2788, "profit": 75, "increase": 5 },
+        { "cost": 4302, "profit": 80, "increase": 6 },
+        { "cost": 7088, "profit": 86, "increase": 6 },
+        { "cost": 12036, "profit": 92, "increase": 6 },
+        { "cost": 21450, "profit": 98, "increase": 7 },
+        { "cost": 40400, "profit": 105, "increase": 8 },
+        { "cost": 80025, "profit": 113, "increase": 7 },
+        { "cost": 166258, "profit": 120, "increase": 9 },
+        { "cost": 362758, "profit": 129, "increase": 9 },
+        { "cost": 831354, "profit": 138, "increase": 10 },
+        { "cost": 1355522, "profit": 148, "increase": 10 },
+        { "cost": 2325478, "profit": 158, "increase": 17 },
+        { "cost": 4155444, "profit": 175, "increase": 0 }
+      ],
+      "condition": {
+        "type": "card",
+        "targetCard": "elara",
+        "cardLevel": 5
+      }
     }
   ],
   "heroType": {
