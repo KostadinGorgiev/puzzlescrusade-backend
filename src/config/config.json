@@ -804,6 +804,40 @@
         "targetCard": "elara",
         "cardLevel": 5
       }
+    },
+    {
+      "slug": "nivara",
+      "name": "Nivara",
+      "title": "The weaver of starlight",
+      "description": "A celestial mage who bends starlight and shadow with her enchanted staff.",
+      "type": "dark",
+      "level": [
+        { "cost": 5000, "profit": 275, "increase": 19 },
+        { "cost": 2656, "profit": 294, "increase": 20 },
+        { "cost": 3091, "profit": 314, "increase": 22 },
+        { "cost": 3777, "profit": 336, "increase": 23 },
+        { "cost": 4850, "profit": 359, "increase": 25 },
+        { "cost": 6533, "profit": 384, "increase": 26 },
+        { "cost": 9224, "profit": 410, "increase": 29 },
+        { "cost": 13690, "profit": 439, "increase": 30 },
+        { "cost": 21293, "profit": 469, "increase": 32 },
+        { "cost": 34650, "profit": 501, "increase": 35 },
+        { "cost": 59400, "profit": 536, "increase": 37 },
+        { "cost": 106000, "profit": 573, "increase": 40 },
+        { "cost": 200855, "profit": 613, "increase": 43 },
+        { "cost": 397250, "profit": 656, "increase": 45 },
+        { "cost": 828696, "profit": 701, "increase": 49 },
+        { "cost": 1800224, "profit": 750, "increase": 52 },
+        { "cost": 4150800, "profit": 802, "increase": 56 },
+        { "cost": 10000833, "profit": 858, "increase": 60 },
+        { "cost": 16564781, "profit": 918, "increase": 64 },
+        { "cost": 29200555, "profit": 982, "increase": 0 }
+      ],
+      "condition": {
+        "type": "card",
+        "targetCard": "aqualon",
+        "cardLevel": 7
+      }
     }
   ],
   "heroType": {
