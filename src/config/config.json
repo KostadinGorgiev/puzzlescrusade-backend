@@ -838,6 +838,40 @@
         "targetCard": "aqualon",
         "cardLevel": 7
       }
+    },
+    {
+      "slug": "voltryn",
+      "name": "Voltryn",
+      "title": "The living spark of battle",
+      "description": "A warrior born of lightning, unleashing storms with every strike.",
+      "type": "ocean",
+      "level": [
+        { "cost": 5000, "profit": 59, "increase": 4 },
+        { "cost": 1303, "profit": 63, "increase": 5 },
+        { "cost": 1475, "profit": 68, "increase": 5 },
+        { "cost": 1750, "profit": 73, "increase": 5 },
+        { "cost": 2155, "profit": 78, "increase": 5 },
+        { "cost": 2846, "profit": 83, "increase": 6 },
+        { "cost": 3965, "profit": 89, "increase": 6 },
+        { "cost": 5745, "profit": 95, "increase": 7 },
+        { "cost": 8769, "profit": 102, "increase": 7 },
+        { "cost": 14155, "profit": 109, "increase": 8 },
+        { "cost": 24025, "profit": 117, "increase": 8 },
+        { "cost": 43558, "profit": 125, "increase": 9 },
+        { "cost": 81467, "profit": 134, "increase": 10 },
+        { "cost": 160532, "profit": 144, "increase": 10 },
+        { "cost": 333335, "profit": 154, "increase": 11 },
+        { "cost": 728668, "profit": 165, "increase": 11 },
+        { "cost": 1664551, "profit": 176, "increase": 13 },
+        { "cost": 4002779, "profit": 189, "increase": 13 },
+        { "cost": 10875186, "profit": 202, "increase": 14 },
+        { "cost": 17969224, "profit": 216, "increase": 0 }
+      ],
+      "condition": {
+        "type": "card",
+        "targetCard": "willow",
+        "cardLevel": 13
+      }
     }
   ],
   "heroType": {
@@ -846,5 +880,279 @@
     "volcano": { "name": "Volcano Born Hero", "color": "#B70D0D" },
     "forest": { "name": "Forest Born Hero", "color": "#149D53" },
     "ocean": { "name": "Ocean Born Hero", "color": "#143E9D" }
-  }
+  },
+  "recipes": [
+    {
+      "key": "moonlight_elixir",
+      "name": "Moonlight Elixir",
+      "ingredients": [
+        "Moonbeam Fern",
+        "Starlight Blossom",
+        "Celestial Ivy",
+        "Frostbloom",
+        "Spiritroot"
+      ]
+    },
+    {
+      "key": "shadowfire_brew",
+      "name": "Shadowfire Brew",
+      "ingredients": [
+        "Shadowvine",
+        "Embergrass",
+        "Voidbloom",
+        "Dreamshade",
+        "Phoenix Ember"
+      ]
+    },
+    {
+      "key": "starfall_salad",
+      "name": "Starfall Salad",
+      "ingredients": [
+        "Starfall Petal",
+        "Evergreen Whisper",
+        "Dragonvine",
+        "Serpentleaf",
+        "Whispering Willow"
+      ]
+    },
+    {
+      "key": "bloodmoon_infusion",
+      "name": "Bloodmoon Infusion",
+      "ingredients": [
+        "Bloodmoon Lily",
+        "Bloodthorn",
+        "Soulroot",
+        "Dreamthistle",
+        "Moonshadow Moss"
+      ]
+    },
+    {
+      "key": "frostfire_tea",
+      "name": "Frostfire Tea",
+      "ingredients": [
+        "Frostfire Blossom",
+        "Radiant Sunflower",
+        "Shimmerleaf",
+        "Frostbloom",
+        "Spiritbark"
+      ]
+    },
+    {
+      "key": "twilight_tonic",
+      "name": "Twilight Tonic",
+      "ingredients": [
+        "Twilight Rose",
+        "Voidroot",
+        "Emberfern",
+        "Nightshade Blossom",
+        "Stardust Lily"
+      ]
+    },
+    {
+      "key": "sunfire_elixir",
+      "name": "Sunfire Elixir",
+      "ingredients": [
+        "Sunfire Lotus",
+        "Embergrass",
+        "Starfrost Berry",
+        "Radiant Sunflower",
+        "Phoenix Ember"
+      ]
+    },
+    {
+      "key": "whisperwind_potion",
+      "name": "Whisperwind Potion",
+      "ingredients": [
+        "Evergreen Whisper",
+        "Faeflower",
+        "Stardust Lily",
+        "Spiritroot",
+        "Shadowvine"
+      ]
+    },
+    {
+      "key": "celestial_brew",
+      "name": "Celestial Brew",
+      "ingredients": [
+        "Celestial Ivy",
+        "Starflare Orchid",
+        "Moonbeam Fern",
+        "Thunderleaf",
+        "Sunfire Lotus"
+      ]
+    },
+    {
+      "key": "astral_essence",
+      "name": "Astral Essence",
+      "ingredients": [
+        "Astral Oak",
+        "Starlight Fern",
+        "Sunfire Lotus",
+        "Radiant Sunflower",
+        "Celestial Ivy"
+      ]
+    }
+  ],
+  "ingredients": [
+    {
+      "key": "starlight_blossom",
+      "name": "Starlight Blossom"
+    },
+    {
+      "key": "moonbeam_fern",
+      "name": "Moonbeam Fern"
+    },
+    {
+      "key": "sunfire_lotus",
+      "name": "Sunfire Lotus"
+    },
+    {
+      "key": "shadowvine",
+      "name": "Shadowvine"
+    },
+    {
+      "key": "celestial_ivy",
+      "name": "Celestial Ivy"
+    },
+    {
+      "key": "thunderleaf",
+      "name": "Thunderleaf"
+    },
+    {
+      "key": "frostbloom",
+      "name": "Frostbloom"
+    },
+    {
+      "key": "embergrass",
+      "name": "Embergrass"
+    },
+    {
+      "key": "spiritroot",
+      "name": "Spiritroot"
+    },
+    {
+      "key": "starfall_petal",
+      "name": "Starfall Petal"
+    },
+    {
+      "key": "voidbloom",
+      "name": "Voidbloom"
+    },
+    {
+      "key": "dreamshade",
+      "name": "Dreamshade"
+    },
+    {
+      "key": "phoenix_ember",
+      "name": "Phoenix Ember"
+    },
+    {
+      "key": "starflare_orchid",
+      "name": "Starflare Orchid"
+    },
+    {
+      "key": "stormblossom",
+      "name": "Stormblossom"
+    },
+    {
+      "key": "silverleaf",
+      "name": "Silverleaf"
+    },
+    {
+      "key": "bloodthorn",
+      "name": "Bloodthorn"
+    },
+    {
+      "key": "evergreen_whisper",
+      "name": "Evergreen Whisper"
+    },
+    {
+      "key": "witchwood_vine",
+      "name": "Witchwood Vine"
+    },
+    {
+      "key": "faeflower",
+      "name": "Faeflower"
+    },
+    {
+      "key": "dragonvine",
+      "name": "Dragonvine"
+    },
+    {
+      "key": "serpentleaf",
+      "name": "Serpentleaf"
+    },
+    {
+      "key": "whispering_willow",
+      "name": "Whispering Willow"
+    },
+    {
+      "key": "bloodmoon_lily",
+      "name": "Bloodmoon Lily"
+    },
+    {
+      "key": "soulroot",
+      "name": "Soulroot"
+    },
+    {
+      "key": "dreamthistle",
+      "name": "Dreamthistle"
+    },
+    {
+      "key": "moonshadow_moss",
+      "name": "Moonshadow Moss"
+    },
+    {
+      "key": "starfrost_berry",
+      "name": "Starfrost Berry"
+    },
+    {
+      "key": "spiritbark",
+      "name": "Spiritbark"
+    },
+    {
+      "key": "twilight_rose",
+      "name": "Twilight Rose"
+    },
+    {
+      "key": "voidroot",
+      "name": "Voidroot"
+    },
+    {
+      "key": "emberfern",
+      "name": "Emberfern"
+    },
+    {
+      "key": "nightshade_blossom",
+      "name": "Nightshade Blossom"
+    },
+    {
+      "key": "stardust_lily",
+      "name": "Stardust Lily"
+    },
+    {
+      "key": "frostfire_blossom",
+      "name": "Frostfire Blossom"
+    },
+    {
+      "key": "radiant_sunflower",
+      "name": "Radiant Sunflower"
+    },
+    {
+      "key": "shimmerleaf",
+      "name": "Shimmerleaf"
+    },
+    {
+      "key": "bloodfire_rose",
+      "name": "Bloodfire Rose"
+    },
+    {
+      "key": "starlight_fern",
+      "name": "Starlight Fern"
+    },
+    {
+      "key": "astral_oak",
+      "name": "Astral Oak"
+    }
+  ]
 }
