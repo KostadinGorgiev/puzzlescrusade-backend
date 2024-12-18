@@ -872,6 +872,40 @@
         "targetCard": "willow",
         "cardLevel": 13
       }
+    },
+    {
+      "slug": "tentaculus",
+      "name": "Tentaculus",
+      "title": "The Mystical Ocean Envoy",
+      "description": "A fun-loving captain with a penchant for treasure and trouble.",
+      "type": "ocean",
+      "level": [
+        { "cost": 5000, "profit": 111, "increase": 8 },
+        { "cost": 2505, "profit": 119, "increase": 8 },
+        { "cost": 2853, "profit": 127, "increase": 9 },
+        { "cost": 3403, "profit": 136, "increase": 9 },
+        { "cost": 4260, "profit": 145, "increase": 10 },
+        { "cost": 5608, "profit": 155, "increase": 11 },
+        { "cost": 7777, "profit": 166, "increase": 12 },
+        { "cost": 11354, "profit": 178, "increase": 12 },
+        { "cost": 17589, "profit": 190, "increase": 13 },
+        { "cost": 28017, "profit": 203, "increase": 14 },
+        { "cost": 47965, "profit": 217, "increase": 16 },
+        { "cost": 85931, "profit": 233, "increase": 16 },
+        { "cost": 161721, "profit": 249, "increase": 17 },
+        { "cost": 319927, "profit": 266, "increase": 19 },
+        { "cost": 664896, "profit": 285, "increase": 19 },
+        { "cost": 1451008, "profit": 304, "increase": 22 },
+        { "cost": 3326001, "profit": 326, "increase": 21 },
+        { "cost": 7245113, "profit": 347, "increase": 25 },
+        { "cost": 16554118, "profit": 372, "increase": 26 },
+        { "cost": 35232998, "profit": 398, "increase": 0 }
+      ],
+      "condition": {
+        "type": "card",
+        "targetCard": "darius_stormblade",
+        "cardLevel": 10
+      }
     }
   ],
   "heroType": {
