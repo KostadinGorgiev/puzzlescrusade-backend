@@ -937,8 +937,8 @@
       ],
       "condition": {
         "type": "card",
-        "targetCard": "darius_stormblade",
-        "cardLevel": 10
+        "targetCard": "nivara",
+        "cardLevel": 8
       }
     }
   ],
