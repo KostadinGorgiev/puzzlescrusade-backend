@@ -906,6 +906,40 @@
         "targetCard": "darius_stormblade",
         "cardLevel": 10
       }
+    },
+    {
+      "slug": "geng",
+      "name": "Geng",
+      "title": "The silent blade",
+      "description": "A master of speed and precision, striking with unmatched agility.",
+      "type": "volcano",
+      "level": [
+        { "cost": 5000, "profit": 68, "increase": 5 },
+        { "cost": 541, "profit": 73, "increase": 5 },
+        { "cost": 628, "profit": 78, "increase": 6 },
+        { "cost": 766, "profit": 84, "increase": 6 },
+        { "cost": 980, "profit": 90, "increase": 6 },
+        { "cost": 1317, "profit": 96, "increase": 7 },
+        { "cost": 1857, "profit": 103, "increase": 7 },
+        { "cost": 2748, "profit": 110, "increase": 8 },
+        { "cost": 4269, "profit": 118, "increase": 9 },
+        { "cost": 6965, "profit": 127, "increase": 9 },
+        { "cost": 11820, "profit": 136, "increase": 9 },
+        { "cost": 21307, "profit": 145, "increase": 11 },
+        { "cost": 40265, "profit": 156, "increase": 11 },
+        { "cost": 79820, "profit": 167, "increase": 11 },
+        { "cost": 166089, "profit": 178, "increase": 13 },
+        { "cost": 362548, "profit": 191, "increase": 14 },
+        { "cost": 831024, "profit": 205, "increase": 14 },
+        { "cost": 1998255, "profit": 219, "increase": 16 },
+        { "cost": 5044127, "profit": 235, "increase": 17 },
+        { "cost": 8625784, "profit": 252, "increase": 0 }
+      ],
+      "condition": {
+        "type": "card",
+        "targetCard": "darius_stormblade",
+        "cardLevel": 10
+      }
     }
   ],
   "heroType": {
