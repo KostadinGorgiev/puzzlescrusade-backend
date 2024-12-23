@@ -111,7 +111,7 @@ module.exports = {
       res.send({ success: false, message: "Card not found" });
       return;
     }
-
+    console.log(card);
     if (card.condition.type === "referral") {
       // check referral from db.Referral
       const refferals = await db.Referral.findAll({
@@ -130,7 +130,7 @@ module.exports = {
         return;
       }
     }
-    res.send({ success: true });
+    res.send({ success: false, message: "Card not found" });
   },
   claim: async function (req, res) {
     const { user_id, task_id } = req.body;
