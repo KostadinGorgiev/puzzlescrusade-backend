@@ -103,6 +103,35 @@ module.exports = {
       return;
     }
   },
+  cardReferralStatus: async function (req, res) {
+    const { user_id, card_slug } = req.body;
+    const card = levelConfig.heros.find((hero) => hero.slug == card_slug);
+
+    if (!card) {
+      res.send({ success: false, message: "Card not found" });
+      return;
+    }
+
+    if (card.condition.type === "referral") {
+      // check referral from db.Referral
+      const refferals = await db.Referral.findAll({
+        where: {
+          user_id: user_id,
+          createdAt: {
+            [Op.gte]: moment(card.condition.launchTime).toDate(),
+          },
+        },
+      });
+      if (!refferals) {
+        res.send({ success: false, message: "Referral not found" });
+        return;
+      } else {
+        res.send({ success: true });
+        return;
+      }
+    }
+    res.send({ success: true });
+  },
   claim: async function (req, res) {
     const { user_id, task_id } = req.body;
     const user = await db.User.findOne({
