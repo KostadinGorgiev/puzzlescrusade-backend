@@ -122,7 +122,7 @@ module.exports = {
           },
         },
       });
-      if (!refferals) {
+      if (refferals.length < card.condition.count) {
         res.send({ success: false, message: "Referral not found" });
         return;
       } else {
