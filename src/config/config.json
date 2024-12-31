@@ -940,6 +940,40 @@
         "targetCard": "nivara",
         "cardLevel": 8
       }
+    },
+    {
+      "slug": "Jingle",
+      "name": "jingle",
+      "title": "The Snowmancer",
+      "description": "A playful spirit of the cold, bringing holiday cheer wherever he wanders.",
+      "type": "ocean",
+      "level": [
+        { "cost": 1100, "profit": 63, "increase": 4 },
+        { "cost": 1233, "profit": 67, "increase": 5 },
+        { "cost": 1452, "profit": 72, "increase": 5 },
+        { "cost": 1785, "profit": 77, "increase": 5 },
+        { "cost": 2254, "profit": 82, "increase": 5 },
+        { "cost": 3089, "profit": 87, "increase": 6 },
+        { "cost": 4358, "profit": 93, "increase": 6 },
+        { "cost": 6528, "profit": 99, "increase": 7 },
+        { "cost": 10125, "profit": 106, "increase": 7 },
+        { "cost": 15785, "profit": 113, "increase": 8 },
+        { "cost": 27556, "profit": 121, "increase": 8 },
+        { "cost": 50668, "profit": 129, "increase": 9 },
+        { "cost": 95861, "profit": 138, "increase": 10 },
+        { "cost": 190457, "profit": 148, "increase": 10 },
+        { "cost": 397558, "profit": 158, "increase": 11 },
+        { "cost": 868963, "profit": 169, "increase": 11 },
+        { "cost": 1992557, "profit": 180, "increase": 11 },
+        { "cost": 3001479, "profit": 191, "increase": 15 },
+        { "cost": 12035712, "profit": 206, "increase": 17 },
+        { "cost": 18123987, "profit": 223, "increase": 0 }
+      ],
+      "condition": {
+        "type": "card",
+        "targetCard": "thalric",
+        "cardLevel": 11
+      }
     }
   ],
   "heroType": {
