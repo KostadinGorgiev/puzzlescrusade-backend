@@ -948,7 +948,7 @@
       "description": "A playful spirit of the cold, bringing holiday cheer wherever he wanders.",
       "type": "ocean",
       "level": [
-        { "cost": 1100, "profit": 63, "increase": 4 },
+        { "cost": 5000, "profit": 63, "increase": 4 },
         { "cost": 1233, "profit": 67, "increase": 5 },
         { "cost": 1452, "profit": 72, "increase": 5 },
         { "cost": 1785, "profit": 77, "increase": 5 },
