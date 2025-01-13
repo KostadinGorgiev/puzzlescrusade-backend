@@ -19,6 +19,7 @@ var dailyCheckInRouter = require("./src/routes/dailyCheckIn");
 var taskRouter = require("./src/routes/task");
 var cardRouter = require("./src/routes/card");
 var adminRouter = require("./src/routes/admin");
+var portionRouter = require("./src/routes/portion");
 const cardController = require("./src/controllers/cardController");
 const userControler = require("./src/controllers/userController");
 
@@ -50,6 +51,7 @@ app.get("/", async function (req, res) {
 app.use("/users", usersRouter);
 app.use("/daily-checkin", dailyCheckInRouter);
 app.use("/task", taskRouter);
+app.use("/portion", portionRouter);
 app.use("/card", cardRouter);
 app.use("/admin", adminRouter);
 

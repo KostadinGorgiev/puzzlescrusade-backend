@@ -1,5 +1,5 @@
 var express = require("express");
-const taskController = require("../controllers/TaskController");
+const taskController = require("../controllers/taskController");
 var router = express.Router();
 
 router.get("/list", taskController.list);

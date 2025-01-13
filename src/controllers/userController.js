@@ -38,6 +38,26 @@ module.exports = {
             last_claim: moment(),
           });
         }
+        let userCurrentPortion = await db.UserCurrentPortion.findOne({
+          where: {
+            user_id: user.id,
+          },
+        });
+        
+        if (!userCurrentPortion) {
+          await db.UserCurrentPortion.create({
+            user_id: user.id,
+            current_recipe:
+              levelConfig.recipes[
+                Math.floor(Math.random() * levelConfig.recipes.length)
+              ].key,
+            current_ingredient_index: 0,
+            wrong_attempt_count: 0,
+            wrong_attempt_time: moment(),
+            is_crafted: false,
+            craft_time: moment(),
+          });
+        }
       } else {
         isNew = true;
         let result = await db.User.create({
@@ -63,6 +83,19 @@ module.exports = {
         await db.CardClaim.create({
           user_id: result.dataValues.id,
           last_claim: moment(),
+        });
+
+        await db.UserCurrentPortion.create({
+          user_id: result.dataValues.id,
+          current_recipe:
+            levelConfig.recipes[
+              Math.floor(Math.random() * levelConfig.recipes.length)
+            ].key,
+          current_ingredient_index: 0,
+          wrong_attempt_count: 0,
+          wrong_attempt_time: moment(),
+          is_crafted: false,
+          craft_time: moment(),
         });
 
         if (startParam) {
@@ -282,6 +315,10 @@ module.exports = {
         {
           model: db.Cards,
           required: false,
+        },
+        {
+          model: db.UserCurrentPortion,
+          required: true,
         },
       ],
     });

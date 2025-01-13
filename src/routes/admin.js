@@ -1,6 +1,6 @@
 var express = require("express");
-const taskController = require("../controllers/TaskController");
-const adminController = require("../controllers/AdminController");
+const taskController = require("../controllers/taskController");
+const adminController = require("../controllers/adminController");
 var router = express.Router();
 
 router.post("/task/add-task", taskController.add);

@@ -36,6 +36,14 @@ module.exports = (sequelize, DataTypes) => {
         sourceKey: "id",
         foreignKey: "user_id",
       });
+      User.hasOne(models.UserCurrentPortion, {
+        sourceKey: "id",
+        foreignKey: "user_id",
+      });
+      User.hasMany(models.UserPortion, {
+        sourceKey: "id",
+        foreignKey: "user_id",
+      });
     }
   }
   User.init(
