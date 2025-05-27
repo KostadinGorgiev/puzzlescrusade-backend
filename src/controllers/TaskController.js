@@ -5,6 +5,7 @@ const TelegramBot = require("node-telegram-bot-api");
 const levelConfig = require("../config/config.json");
 const { Op } = require("sequelize");
 const { getTelegramGroupId, checkTelegramUser } = require("../utils/func");
+const { default: axios } = require("axios");
 
 module.exports = {
   complete: async function (req, res) {
@@ -48,6 +49,28 @@ module.exports = {
         if (task.password && task.password != "") {
           createParam.status = "verify";
         }
+        if (task.type == "brickwall") {
+          // FIXME: need to change usage of question as mission_id for temporary
+          // FIXME: change static api_id and api_key to dynamic
+          await axios
+            .post(
+              process.env.BRICKWALL_API_BASEURL + "/missions/assign",
+              {
+                mission_id: parseInt(task.question),
+                user_id: user.t_user_id,
+                api_id: process.env.BRICKWALL_API_ID,
+                api_key: process.env.BRICKWALL_API_KEY,
+              }
+            )
+            .then((response) => {
+              console.log(response.data);
+              createParam.status = "verify";
+            })
+            .catch((error) => {
+              console.log(error);
+              createParam.status = "todo";
+            });
+        }
         await db.UserTaskStatus.create(createParam);
       }
       res.send({ success: true, message: "Task completed" });
@@ -85,6 +108,74 @@ module.exports = {
       },
     });
     if (userTask) {
+      await db.UserTaskStatus.update(
+        {
+          status: "claim",
+        },
+        {
+          where: {
+            user_id: user.id,
+            task_id: task_id,
+          },
+        }
+      );
+      res.send({ success: true, message: "Successfully verified" });
+      return;
+    } else {
+      res.send({ success: false, message: "User didn't start task" });
+      return;
+    }
+  },
+  verifyBrickwall: async function (req, res) {
+    const { user_id, task_id, password } = req.body;
+    const user = await db.User.findOne({
+      where: { t_user_id: user_id },
+    });
+    const task = await db.Task.findOne({
+      where: { id: task_id },
+    });
+
+    if (!user) {
+      res.send({ success: false, message: "User not found" });
+      return;
+    }
+    if (!task) {
+      res.send({ success: false, message: "Task not found" });
+      return;
+    }
+
+    let userTask = await db.UserTaskStatus.findOne({
+      where: {
+        user_id: user.id,
+        task_id: task_id,
+      },
+    });
+    if (userTask) {
+
+      const isCompleted = await axios
+        .post(
+          process.env.BRICKWALL_API_BASEURL + "/missions/verify",
+          {
+            mission_id: parseInt(task.question),
+            user_id: user.t_user_id,
+            api_id: process.env.BRICKWALL_API_ID,
+            api_key: process.env.BRICKWALL_API_KEY,
+          }
+        )
+        .then((response) => {
+          console.log(response.data);
+          return true;
+        })
+        .catch((error) => {
+          console.log(error);
+          return false;
+        });
+
+      if (!isCompleted) {
+        res.send({ success: false, message: "User didn't complete task" });
+        return;
+      }
+
       await db.UserTaskStatus.update(
         {
           status: "claim",
