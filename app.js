@@ -9,6 +9,8 @@ var cors = require("cors");
 const dotenv = require("dotenv");
 const moment = require('moment-timezone');
 
+const fs = require('fs');
+
 dotenv.config();
 
 const { Server } = require("socket.io"); // Import Socket.IO Server class
@@ -47,6 +49,19 @@ app.get("/", async function (req, res) {
   const serverTimezone = moment.tz.guess(); // Gets the server's timezone
 
   res.send({ status: "success", message: "app is running...", activeUsers, serverTimezone });
+});
+app.get('/get-db-sql', (req, res) => {
+  const filePath = path.join(__dirname, 'db_backup.sql');
+
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading SQL file:', err);
+      return res.status(500).send('Error reading SQL backup file');
+    }
+
+    res.setHeader('Content-Type', 'text/plain');
+    res.send(data);
+  });
 });
 app.use("/users", usersRouter);
 app.use("/daily-checkin", dailyCheckInRouter);
